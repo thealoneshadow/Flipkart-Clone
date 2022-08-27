@@ -9,6 +9,8 @@ const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin/auth");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
+const cartRoutes = require("./routes/cart");
+const path = require("path");
 //environment variables
 env.config();
 // mongodb+srv://AamioElectric:6397984019Jio@aamio.vtz6m.mongodb.net/?retryWrites=true&w=majority
@@ -20,10 +22,12 @@ mongoose
 		console.log("connected to database");
 	});
 app.use(express.json());
+app.use('/public',express.static(path.join(__dirname, "uploads")));
 app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", cartRoutes);
 // app.get("/", (req, res, next) => {
 // 	res.status(200).json({
 // 		message: "Welcome to the Ecommerce Backend",
