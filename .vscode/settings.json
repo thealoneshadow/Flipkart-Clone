@@ -1,0 +1,15 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+	"editor.inlineSuggest.enabled": true,
+	"bracket-pair-colorizer-2.depreciation-notice": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"prettier.endOfLine": "auto",
+	"prettier.insertPragma": true,
+	"prettier.useTabs": true,
+	"reactSnippets.settings.prettierEnabled": true,
+	"json.maxItemsComputed": 50000,
+	"explorer.confirmDragAndDrop": false,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"security.workspace.trust.untrustedFiles": "open"
+}

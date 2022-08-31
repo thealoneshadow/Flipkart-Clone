@@ -2,11 +2,51 @@
 
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
+import { signout } from "../../actions";
 function Header() {
+	const auth = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
+	const logout = () => {
+		dispatch(signout());
+	};
+	const renderLoggedInLinks = () => {
+		return (
+			<Nav>
+				<li className="nav-item">
+					<span className="nav-link" onClick={logout}>
+						Signout
+					</span>
+				</li>
+			</Nav>
+		);
+	};
+	const renderNonLoggedInLinks = () => {
+		return (
+			<Nav>
+				<li className="nav-item">
+					<NavLink to="/signin" className="nav-link">
+						Signin
+					</NavLink>
+				</li>
+				<li className="nav-item">
+					<NavLink to="/signup" className="nav-link">
+						Signup
+					</NavLink>
+				</li>
+			</Nav>
+		);
+	};
 	return (
-		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-			<Container>
+		<Navbar
+			collapseOnSelect
+			expand="lg"
+			bg="dark"
+			variant="dark"
+			style={{ zIndex: 1 }}
+		>
+			<Container fluid>
 				{/* <Navbar.Brand href="#home">Admin Dashboard</Navbar.Brand> */}
 				<Link to="/" className="navbar-brand">
 					Admin Dashboard
@@ -30,22 +70,7 @@ function Header() {
 								</NavDropdown.Item>
 							</NavDropdown> */}
 					</Nav>
-					<Nav>
-						<li className="nav-item">
-							<NavLink to="signin" className="nav-link">
-								Signin
-							</NavLink>
-						</li>
-						<li className="nav-item">
-							<NavLink to="signup" className="nav-link">
-								Signup
-							</NavLink>
-						</li>
-
-						{/* <Nav.Link eventKey={2} href="#memes">
-								Dank memes
-							</Nav.Link> */}
-					</Nav>
+					{auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

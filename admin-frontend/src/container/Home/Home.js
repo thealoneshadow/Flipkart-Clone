@@ -1,13 +1,25 @@
 /** @format */
 
 import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import Layout from "../../components/Layout/Layout";
 import "../Home/Home.css";
 export default function Home(props) {
 	return (
 		<div>
 			<Layout>
-				<div
+				<Container fluid>
+					<Row>
+						<Col md={2} className="sidebar">
+							sidebar
+						</Col>
+						<Col md={10} style={{ marginLeft: "auto" }}>
+							container
+						</Col>
+					</Row>
+				</Container>
+
+				{/* <div
 					style={{
 						marginTop: "1rem",
 						marginBottom: "-3.6rem",
@@ -24,7 +36,7 @@ export default function Home(props) {
 				>
 					This is a simple hero unit, a simple jumbotron-style component for
 					calling
-				</p>
+				</p> */}
 			</Layout>
 		</div>
 	);

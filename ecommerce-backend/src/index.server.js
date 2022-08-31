@@ -11,6 +11,7 @@ const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 const path = require("path");
+const cors = require("cors");
 //environment variables
 env.config();
 // mongodb+srv://AamioElectric:6397984019Jio@aamio.vtz6m.mongodb.net/?retryWrites=true&w=majority
@@ -21,8 +22,9 @@ mongoose
 	.then(() => {
 		console.log("connected to database");
 	});
+app.use(cors());
 app.use(express.json());
-app.use('/public',express.static(path.join(__dirname, "uploads")));
+app.use("/public", express.static(path.join(__dirname, "uploads")));
 app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
