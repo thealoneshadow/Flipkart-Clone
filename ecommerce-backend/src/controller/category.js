@@ -17,6 +17,7 @@ function createCategories(categories, parentId = null) {
 			_id: cat._id,
 			name: cat.name,
 			slug: cat.slug,
+			parentId: cat.parentId,
 			children: createCategories(categories, cat._id),
 		});
 	}
@@ -24,16 +25,15 @@ function createCategories(categories, parentId = null) {
 }
 
 exports.addCategory = (req, res) => {
-	
 	const categoryObj = {
 		name: req.body.name,
-		slug: slugify(req.body.name)
+		slug: slugify(req.body.name),
 	};
 
-	if(req.file){
-		categoryObj.categoryImage = process.env.API + "/public/" + req.file.filename;
+	if (req.file) {
+		categoryObj.categoryImage =
+			process.env.API + "/public/" + req.file.filename;
 	}
-	
 
 	if (req.body.parentId) {
 		categoryObj.parentId = req.body.parentId;

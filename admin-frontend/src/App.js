@@ -7,8 +7,11 @@ import Home from "./container/Home/Home";
 import Signin from "./container/Signin/Signin";
 import Signup from "./container/Signup/Signup";
 import PrivateRoute from "./components/HOC/PrivateRoute";
-import { isUserLoggedIn } from "./actions";
+import { isUserLoggedIn, getAllCategory, getInitialData } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
+import Products from "./container/Products/Products";
+import Orders from "./container/Orders/Orders";
+import Category from "./container/Category/Category";
 
 function App() {
 	const dispatch = useDispatch();
@@ -16,6 +19,7 @@ function App() {
 	useEffect(() => {
 		if (!auth.authenticate) {
 			dispatch(isUserLoggedIn());
+			dispatch(getInitialData());
 		}
 	}, []);
 	return (
@@ -23,6 +27,15 @@ function App() {
 			<Switch>
 				<Route element={<PrivateRoute />}>
 					<Route path="/" element={<Home />} />
+				</Route>
+				<Route element={<PrivateRoute />}>
+					<Route path="/category" element={<Category />} />
+				</Route>
+				<Route element={<PrivateRoute />}>
+					<Route path="/products" element={<Products />} />
+				</Route>
+				<Route element={<PrivateRoute />}>
+					<Route path="/orders" element={<Orders />} />
 				</Route>
 				<Route path="/signin" exact element={<Signin />} />
 				<Route path="/signup" exact element={<Signup />} />

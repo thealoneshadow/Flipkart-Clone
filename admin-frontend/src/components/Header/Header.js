@@ -42,6 +42,7 @@ function Header() {
 		<Navbar
 			collapseOnSelect
 			expand="lg"
+			fixed="top"
 			bg="dark"
 			variant="dark"
 			style={{ zIndex: 1 }}
