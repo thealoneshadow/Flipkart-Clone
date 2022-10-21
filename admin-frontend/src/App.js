@@ -7,11 +7,12 @@ import Home from "./container/Home/Home";
 import Signin from "./container/Signin/Signin";
 import Signup from "./container/Signup/Signup";
 import PrivateRoute from "./components/HOC/PrivateRoute";
-import { isUserLoggedIn, getAllCategory, getInitialData } from "./actions";
+import { isUserLoggedIn, getInitialData } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import Products from "./container/Products/Products";
 import Orders from "./container/Orders/Orders";
 import Category from "./container/Category/Category";
+import NewPage from "./container/NewPage/NewPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -21,12 +22,15 @@ function App() {
 			dispatch(isUserLoggedIn());
 			dispatch(getInitialData());
 		}
-	}, []);
+	});
 	return (
 		<div>
 			<Switch>
 				<Route element={<PrivateRoute />}>
 					<Route path="/" element={<Home />} />
+				</Route>
+				<Route element={<PrivateRoute />}>
+					<Route path="/page" element={<NewPage />} />
 				</Route>
 				<Route element={<PrivateRoute />}>
 					<Route path="/category" element={<Category />} />

@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Route, Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
 	let auth = localStorage.getItem("token");

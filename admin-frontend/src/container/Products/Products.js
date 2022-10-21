@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Row, Col, Table } from "react-bootstrap";
 import Input from "../../components/UI/Input/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { addProduct } from "../../actions";

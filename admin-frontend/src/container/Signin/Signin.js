@@ -11,7 +11,7 @@ import { Navigate } from "react-router-dom";
 function Signin(props) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
+	//const [error, setError] = useState("");
 	const auth = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 

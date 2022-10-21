@@ -11,38 +11,34 @@ const initState = {
 
 const buildNewcategories = (parentId, categories, category) => {
 	let myCategories = [];
-	if (parentId == undefined) {
+	if (parentId === undefined) {
 		return [
 			...categories,
 			{
 				_id: category._id,
 				name: category.name,
 				slug: category.slug,
+				type: category.type,
 				children: [],
 			},
 		];
 	} else {
 		for (let cat of categories) {
 			if (cat._id === parentId) {
+				const newCategory = {
+					_id: category._id,
+					name: category.name,
+					slug: category.slug,
+					parentId: category.parentId,
+					type: category.type,
+					children: [],
+				};
 				myCategories.push({
 					...cat,
 					children:
 						cat.children && cat.children.length > 0
-							? buildNewcategories(
-									parentId,
-									[
-										...cat.children,
-										{
-											_id: category._id,
-											name: category.name,
-											slug: category.slug,
-											parentId: category.parentId,
-											children: category.children,
-										},
-									],
-									category
-							  )
-							: [],
+							? [...cat.children, newCategory]
+							: [newCategory],
 				});
 			} else {
 				myCategories.push({
@@ -94,6 +90,42 @@ export default (state = initState, action) => {
 				loading: false,
 			};
 			break;
+		case categoryConstants.UPDATE_CATEGORIES_REQUEST:
+			state = {
+				...state,
+				loading: true,
+			};
+			break;
+		case categoryConstants.UPDATE_CATEGORIES_SUCCESS:
+			state = {
+				...state,
+				loading: false,
+			};
+			break;
+		case categoryConstants.UPDATE_CATEGORIES_FAILURE:
+			state = {
+				...state,
+				error: action.payload.error,
+			};
+			break;
+		case categoryConstants.DELETE_CATEGORIES_REQUEST:
+			state = {
+				...state,
+				loading: true,
+			};
+			break;
+		case categoryConstants.DELETE_CATEGORIES_SUCCESS:
+			state = {
+				...state,
+				loading: false,
+			};
+			break;
+		case categoryConstants.DELETE_CATEGORIES_FAILURE:
+			state = {
+				...state,
+				error: action.payload.error,
+				loading: false,
+			};
 	}
 	return state;
 };
