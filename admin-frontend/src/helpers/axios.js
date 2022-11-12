@@ -24,11 +24,9 @@ axiosInstance.interceptors.request.use((req) => {
 
 axiosInstance.interceptors.response.use(
 	(res) => {
-		// console.log("Response Received", res);
 		return res;
 	},
 	(error) => {
-		console.log("Response Error", error.response);
 		const { status } = error.response;
 		if (status === 400 && status === 500) {
 			localStorage.clear();

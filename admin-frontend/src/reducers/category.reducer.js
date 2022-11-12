@@ -72,7 +72,7 @@ export default (state = initState, action) => {
 			break;
 		case categoryConstants.ADD_NEW_CATEGORY_SUCCESS:
 			const category = action.payload.category.data;
-			console.log(category);
+
 			const updateCategories = buildNewcategories(
 				category.parentId,
 				state.categories,
@@ -88,6 +88,7 @@ export default (state = initState, action) => {
 			state = {
 				...state,
 				loading: false,
+				error: action.payload.error,
 			};
 			break;
 		case categoryConstants.UPDATE_CATEGORIES_REQUEST:

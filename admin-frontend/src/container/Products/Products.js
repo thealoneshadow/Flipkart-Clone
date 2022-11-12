@@ -154,7 +154,6 @@ const Products = (props) => {
 	const showProductDetailsModal = (product) => {
 		setProductDetails(product);
 		setProductDetailModal(true);
-		console.log(product);
 	};
 
 	const renderProductDetailsModal = () => {

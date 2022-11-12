@@ -50,7 +50,7 @@ exports.createProduct = async (req, res) => {
 exports.getProductsBySlug = async (req, res) => {
 	const { slug } = req.params;
 	Category.findOne({ slug: slug })
-		.select("_id")
+		.select("_id type")
 		.exec((error, category) => {
 			if (error) {
 				return res.status(400).json({
@@ -90,4 +90,24 @@ exports.getProductsBySlug = async (req, res) => {
 			}
 			//res.status(200).json({ category });
 		});
+};
+
+exports.getProductDetailsById = async (req, res) => {
+	const { productId } = req.params;
+	if (productId) {
+		try {
+			const product = await Product.findOne({ _id: productId }).exec();
+			res.status(200).json({ product });
+		} catch (error) {
+			return res.status(400).json({
+				status: 500,
+				message: error,
+			});
+		}
+	} else {
+		return res.status(400).json({
+			status: 500,
+			message: "Params required",
+		});
+	}
 };

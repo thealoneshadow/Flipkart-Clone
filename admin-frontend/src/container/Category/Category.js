@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Layout from "../../components/Layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,6 +41,13 @@ export default function Category() {
 	const [expandedArray, setExpandedArray] = useState([]);
 	const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
 	const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
+
+	useEffect(() => {
+		if (!category.loading) {
+			setShow(false);
+		}
+	}, [category.loading]);
+
 	const handleClose = () => {
 		const form = new FormData();
 		if (categoryName === "") {
@@ -254,7 +261,8 @@ export default function Category() {
 			</Container>
 			<UpdateCategoriesModal
 				show={updateCategoryModal}
-				handleClose={updateCategoriesForm}
+				handleClose={() => setUpdateCategoryModal(false)}
+				onSubmit={updateCategoriesForm}
 				modalTitle={"Update Categories"}
 				size="lg"
 				expandedArray={expandedArray}
@@ -266,7 +274,8 @@ export default function Category() {
 			{/* Add  Categories*/}
 			<AddCategoryModal
 				show={show}
-				handleClose={handleClose}
+				handleClose={() => setShow(false)}
+				onSubmit={handleClose}
 				modalTitle={"Add New Category"}
 				categoryName={categoryName}
 				setCategoryName={setCategoryName}
