@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import ProductStore from "./ProductStore/ProductStore";
 import getParams from "../../utils/getParams";
 import ProductPage from "./ProductPage/ProductPage";
+import ClothingAndAccessories from "./ClothingAndAccessories/ClothingAndAccessories";
 
 export default function ProductListPage(props) {
 	const location = useLocation();
@@ -21,7 +22,7 @@ export default function ProductListPage(props) {
 				content = <ProductPage {...props} />;
 				break;
 			default:
-				content = null;
+				content = <ClothingAndAccessories {...props} />;
 		}
 		return content;
 	};

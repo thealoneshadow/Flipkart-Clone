@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout/Layout";
 import Card from "../../components/UI/Card/Card";
 import CartItem from "./CartItem/CartItem";
-// import CartItem from "./CartItem";
+import { useNavigate } from "react-router-dom";
 import { addToCart, getCartItems, removeCartItem } from "../../actions";
-// import PriceDetails from "../../components/PriceDetails";
-
+import PriceDetails from "../../components/PriceDetails/PriceDetails";
 import "./CartPage.css";
-//import { MaterialButton } from "../../components/MaterialUI";
+import { MaterialButton } from "../../components/MaterialUI/MaterialUI";
 
 /**
  * @author
@@ -30,6 +29,7 @@ const CartPage = (props) => {
 	const auth = useSelector((state) => state.auth);
 	const [cartItems, setCartItems] = useState(cart.cartItems);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setCartItems(cart.cartItems);
@@ -87,8 +87,35 @@ const CartPage = (props) => {
 							onRemoveCartItem={onRemoveCartItem}
 						/>
 					))}
+
+					<div
+						style={{
+							width: "100%",
+							display: "flex",
+							background: "#ffffff",
+							justifyContent: "flex-end",
+							boxShadow: "0 0 10px 10px #eee",
+							padding: "10px 0",
+							boxSizing: "border-box",
+						}}
+					>
+						<div style={{ width: "250px" }}>
+							<MaterialButton
+								title="PLACE ORDER"
+								onClick={() => navigate(`/checkout`)}
+							/>
+						</div>
+					</div>
 				</Card>
-				<Card headerLeft={`Price `} style={{ width: "500px" }}></Card>
+				<PriceDetails
+					totalItem={Object.keys(cart.cartItems).reduce(function (qty, key) {
+						return qty + cart.cartItems[key].qty;
+					}, 0)}
+					totalPrice={Object.keys(cart.cartItems).reduce((totalPrice, key) => {
+						const { price, qty } = cart.cartItems[key];
+						return totalPrice + price * qty;
+					}, 0)}
+				/>
 			</div>
 		</Layout>
 	);

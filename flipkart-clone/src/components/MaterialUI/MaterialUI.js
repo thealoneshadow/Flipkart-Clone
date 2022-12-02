@@ -72,7 +72,7 @@ const MaterialButton = (props) => {
 	return (
 		<div
 			style={{
-				width: "90%",
+				width: "100%",
 				...props.style,
 			}}
 		>
@@ -100,10 +100,12 @@ const DropdownMenu = (props) => {
 							<li key={index}>
 								<a
 									onClick={(e) => {
-										e.preventDefault();
-										item.onClick && item.onClick();
+										if (item.onClick) {
+											e.preventDefault();
+											item.onClick && item.onClick();
+										}
 									}}
-									href={item.href}
+									href={`${item.href}`}
 								>
 									{item.label}
 								</a>
@@ -115,4 +117,28 @@ const DropdownMenu = (props) => {
 	);
 };
 
-export { Modal, MaterialInput, MaterialButton, DropdownMenu };
+const Anchor = (props) => {
+	return (
+		<button {...props} className="anchorButton">
+			{props.name}
+		</button>
+	);
+};
+
+const Breed = (props) => {
+	return (
+		<div className="breed">
+			<ul>
+				{props.breed &&
+					props.breed.map((item, index) => (
+						<li key={index}>
+							<a href={item.href}>{item.name}</a>
+							{props.breedIcon}
+						</li>
+					))}
+			</ul>
+		</div>
+	);
+};
+
+export { Modal, MaterialInput, MaterialButton, DropdownMenu, Anchor, Breed };

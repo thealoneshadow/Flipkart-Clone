@@ -43,9 +43,6 @@ exports.addItemToCart = (req, res) => {
 				}
 				promiseArray.push(runUpdate(condition, update));
 			});
-			console.log("I am 3" + promiseArray[0]);
-			console.log("I am 3" + promiseArray[1]);
-			console.log("I am 3" + promiseArray[2]);
 			Promise.all(promiseArray)
 				.then((response) => res.status(201).json({ response }))
 				.catch((error) => {
