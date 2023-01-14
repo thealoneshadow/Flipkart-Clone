@@ -16,6 +16,7 @@ const addressRoutes = require("./routes/address");
 const orderRoutes = require("./routes/order");
 const path = require("path");
 const cors = require("cors");
+const adminOrderRoute = require("./routes/admin/order.routes");
 //environment variables
 env.config();
 // mongodb+srv://AamioElectric:6397984019Jio@aamio.vtz6m.mongodb.net/?retryWrites=true&w=majority
@@ -36,6 +37,7 @@ app.use("/api", initialDataRoutes);
 app.use("/api", pageRoutes);
 app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
+app.use("/api", adminOrderRoute);
 app.listen(process.env.PORT, () => {
 	console.log(process.env.PORT);
 });
