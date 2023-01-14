@@ -12,7 +12,9 @@ const initState = {
 	placedOrderId: null,
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initState, action) => {
+	// eslint-disable-next-line default-case
 	switch (action.type) {
 		case userConstants.GET_USER_ADDRESS_REQUEST:
 			state = {

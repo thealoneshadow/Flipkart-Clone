@@ -9,25 +9,21 @@ import "./ProductStore.css";
 import { generatePublicUrl } from "../../../urlConfig";
 import { Link } from "react-router-dom";
 import Card from "../../../components/UI/Card/Card";
+import Price from "../../../components/UI/Price";
+import Rating from "../../../components/UI/Rating";
 
 export default function ProductStore() {
 	const product = useSelector((state) => state.product);
 	const dispatch = useDispatch();
 	const location = useLocation();
-	const [priceRange, setPriceRange] = useState({
-		under5k: 5000,
-		under10k: 10000,
-		under15k: 15000,
-		under20k: 20000,
-		under30k: 30000,
-	});
+	const priceRange = product.priceRange;
 	const slug = location.pathname.split("/")[1];
 	useEffect(() => {
 		dispatch(getProductsBySlug(slug));
 	}, []);
 	return (
 		<>
-			{Object.keys(product.productsByPrice).map((key, index) => {
+			{Object.keys(product.priceRange).map((key, index) => {
 				return (
 					<Card
 						headerLeft={`${slug} mobiles ${priceRange[key]}`}
@@ -52,10 +48,19 @@ export default function ProductStore() {
 									<div className="productInfo">
 										<div style={{ margin: "5px 0" }}>{product.name}</div>
 										<div>
-											<span>4.34</span>&nbsp;
-											<span>3354</span>
+											<Rating value="4.3" />
+											&nbsp;&nbsp;
+											<span
+												style={{
+													color: "#777",
+													fontWeight: "500",
+													fontSize: "12px",
+												}}
+											>
+												(3353)
+											</span>
 										</div>
-										<div className="productPrice">{product.price}</div>
+										<Price value={product.price} />
 									</div>
 								</Link>
 							))}
