@@ -26,8 +26,6 @@ const OrderPage = (props) => {
 		dispatch(getOrders());
 	}, []);
 
-	console.log(user);
-
 	return (
 		<Layout>
 			<div style={{ maxWidth: "1160px", margin: "5px auto" }}>

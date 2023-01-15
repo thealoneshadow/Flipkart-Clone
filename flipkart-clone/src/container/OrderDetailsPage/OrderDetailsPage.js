@@ -18,9 +18,7 @@ const OrderDetailsPage = (props) => {
 	const dispatch = useDispatch();
 	const orderDetails = useSelector((state) => state.user.orderDetails);
 	const params = useParams();
-	console.log(params);
 	useEffect(() => {
-		console.log({ props });
 		const payload = {
 			orderId: params.orderId,
 		};

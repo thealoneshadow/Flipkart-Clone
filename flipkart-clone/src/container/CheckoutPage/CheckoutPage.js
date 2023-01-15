@@ -118,7 +118,6 @@ const CheckoutPage = (props) => {
 	};
 
 	const selectAddress = (addr) => {
-		//console.log(addr);
 		const updatedAddress = address.map((adr) =>
 			adr._id === addr._id
 				? { ...adr, selected: true }
@@ -166,8 +165,6 @@ const CheckoutPage = (props) => {
 			paymentStatus: "pending",
 			paymentType: "cod",
 		};
-
-		console.log(payload);
 		dispatch(addOrder(payload));
 		setConfirmOrder(true);
 	};

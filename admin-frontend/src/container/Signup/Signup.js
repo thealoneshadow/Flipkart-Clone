@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import Input from "../../components/UI/Input/Input";
@@ -17,6 +17,14 @@ function Signup(props) {
 	//const [error, setError] = useState("");
 	const user = useSelector((state) => state.user);
 	const dispatch = useDispatch();
+	useEffect(() => {
+		if (!user.loading) {
+			setFirstName("");
+			setLastName("");
+			setEmail("");
+			setPassword("");
+		}
+	}, [user.loading]);
 	const userSignUp = (e) => {
 		e.preventDefault();
 		const user = { firstName, lastName, email, password };

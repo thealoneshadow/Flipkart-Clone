@@ -14,17 +14,14 @@ function runUpdate(condition, updateData) {
 
 exports.addItemToCart = (req, res) => {
 	Cart.findOne({ user: req.user._id }).exec((error, cart) => {
-		console.log("I am 1");
 		if (error) return res.status(400).json({ error });
 		if (cart) {
-			console.log("I am 2");
 			//if cart already exists then update cart by quantity
 			let promiseArray = [];
 
 			req.body.cartItems.forEach((cartItem) => {
 				const product = cartItem.product;
 				const item = cart.cartItems.find((c) => c.product == product);
-				console.log(item);
 				let condition, update;
 				if (item) {
 					condition = { user: req.user._id, "cartItems.product": product };
@@ -46,7 +43,6 @@ exports.addItemToCart = (req, res) => {
 			Promise.all(promiseArray)
 				.then((response) => res.status(201).json({ response }))
 				.catch((error) => {
-					console.log("I am 4");
 					res.status(400).json({ error });
 				});
 		} else {
@@ -71,8 +67,6 @@ exports.getCartItems = (req, res) => {
 	Cart.findOne({ user: req.user._id })
 		.populate("cartItems.product", "_id name price productPictures")
 		.exec((error, cart) => {
-			console.log("cart data" + cart);
-
 			if (error) return res.status(400).json({ error });
 			if (cart) {
 				let cartItems = {};

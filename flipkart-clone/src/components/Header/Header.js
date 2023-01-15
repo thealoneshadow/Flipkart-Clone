@@ -25,6 +25,7 @@ import {
 } from "../MaterialUI/MaterialUI";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signout, signup as _signup } from "../../actions";
+import Cart from "../UI/Cart";
 /**
  * @author
  * @function Header
@@ -38,6 +39,7 @@ const Header = (props) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const auth = useSelector((state) => state.auth);
+	const cart = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
 	const userSignup = () => {
 		const user = { firstName, lastName, email, password };
@@ -253,7 +255,7 @@ const Header = (props) => {
 					/>
 					<div>
 						<a className="cart" href={`/cart`}>
-							<IoIosCart />
+							<Cart count={Object.keys(cart.cartItems).length} />
 							<span style={{ margin: "0 10px" }}>Cart</span>
 						</a>
 					</div>

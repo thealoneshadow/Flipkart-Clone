@@ -66,7 +66,6 @@ const AddressForm = (props) => {
 				addressType,
 			},
 		};
-		console.log(payload);
 		if (id) {
 			payload.address._id = id;
 		}
@@ -75,9 +74,7 @@ const AddressForm = (props) => {
 	};
 
 	useEffect(() => {
-		console.log("addressCount", user.address);
 		if (submitFlag) {
-			console.log("where are we", user);
 			let _address = {};
 			if (id) {
 				_address = {
