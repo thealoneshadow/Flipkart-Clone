@@ -16,7 +16,10 @@ import CartPage from "./container/CartPage/CartPage";
 import CheckoutPage from "./container/CheckoutPage/CheckoutPage";
 import OrderPage from "./container/OrderPage/OrderPage";
 import OrderDetailsPage from "./container/OrderDetailsPage/OrderDetailsPage";
-
+import {
+	getProductsByCategory,
+	getProductsBySlug,
+} from "./actions/product.action";
 function App() {
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
@@ -25,7 +28,6 @@ function App() {
 			dispatch(isUserLoggedIn());
 		}
 	}, [auth.authenticate]);
-
 	useEffect(() => {
 		dispatch(updateCart());
 	}, [auth.authenticate]);

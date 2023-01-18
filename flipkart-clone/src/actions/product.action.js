@@ -17,6 +17,23 @@ export const getProductsBySlug = (slug) => {
 	};
 };
 
+export const getProductsByCategory = (category) => {
+	return async (dispatch) => {
+		console.log(1);
+		const res = await axios.get(`/allproducts/${category}`);
+		if (res.status === 200) {
+			console.log(2);
+			dispatch({
+				type: productConstants.GET_PRODUCTS_BY_SLUG,
+				payload: res.data,
+			});
+		} else {
+			// dispatch({
+			// })
+		}
+	};
+};
+
 export const getProductPage = (payload) => {
 	return async (dispatch) => {
 		try {

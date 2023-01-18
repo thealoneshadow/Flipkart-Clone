@@ -140,3 +140,24 @@ exports.getProducts = async (req, res) => {
 
 	res.status(200).json({ products });
 };
+
+exports.getProductDetailsByCategory = async (req, res) => {
+	if (req.params) {
+		try {
+			const products = await Product.find({
+				category: req.params.productCategory,
+			}).exec();
+			res.status(200).json({ products });
+		} catch (error) {
+			return res.status(400).json({
+				status: 500,
+				message: error,
+			});
+		}
+	} else {
+		return res.status(400).json({
+			status: 500,
+			message: "Params required",
+		});
+	}
+};

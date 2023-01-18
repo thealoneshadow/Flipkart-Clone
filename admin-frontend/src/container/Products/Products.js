@@ -23,23 +23,37 @@ const Products = (props) => {
 	const product = useSelector((state) => state.product);
 	const dispatch = useDispatch();
 	const handleClose = () => {
-		const form = new FormData();
+		//const form = new FormData();
 		// const cat = {
 		// 	categoryName,
 		// 	parentCategoryId,
 		// 	categoryImage,
 		// };
 
+		// form.append("name", name);
+		// form.append("quantity", quantity);
+		// form.append("price", price);
+		// form.append("description", description);
+		// form.append("category", categoryId);
+		// for (let pic of productPictures) {
+		// 	form.append("productPicture", pic);
+		// }
+		// dispatch(addProduct(form));
+		setShow(false);
+	};
+	const submitProductForm = () => {
+		const form = new FormData();
 		form.append("name", name);
 		form.append("quantity", quantity);
 		form.append("price", price);
 		form.append("description", description);
 		form.append("category", categoryId);
+
 		for (let pic of productPictures) {
 			form.append("productPicture", pic);
 		}
-		dispatch(addProduct(form));
-		setShow(false);
+
+		dispatch(addProduct(form)).then(() => setShow(false));
 	};
 	const handleShow = () => setShow(true);
 
@@ -109,7 +123,8 @@ const Products = (props) => {
 			<Modal
 				show={show}
 				handleClose={handleClose}
-				modalTitle={"Add New Category"}
+				modalTitle={"Add New Product"}
+				onSubmit={submitProductForm}
 			>
 				<Input
 					label="Name"

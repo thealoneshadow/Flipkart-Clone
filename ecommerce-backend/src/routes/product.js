@@ -10,6 +10,7 @@ const {
 	getProductDetailsById,
 	deleteProductById,
 	getProducts,
+	getProductDetailsByCategory,
 } = require("../controller/product");
 const { upload } = require("../common-middleware");
 // const multer = require("multer");
@@ -37,6 +38,7 @@ router.post(
 
 router.get("/products/:slug", getProductsBySlug);
 router.get("/product/:productId", getProductDetailsById);
+router.get("/allproducts/:productCategory", getProductDetailsByCategory);
 router.delete(
 	"/product/deleteProductById",
 	requireSignin,

@@ -26,6 +26,7 @@ const getProducts = () => {
 
 // modified actrion
 export const addProduct = (form) => {
+	console.log(form.type);
 	return async (dispatch) => {
 		try {
 			dispatch({ type: productConstants.ADD_PRODUCT_REQUEST });
