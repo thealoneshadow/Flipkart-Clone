@@ -14,6 +14,7 @@ const {
 	deleteProductById,
 	getProducts,
 	getProductDetailsByCategory,
+	talktoChatGPT,
 } = require("../controller/product.js");
 const { upload } = require("../common-middleware/index.js");
 // const multer = require("multer");
@@ -55,6 +56,6 @@ router.post(
 	getProducts
 );
 
-//router.get("/product/getProduct", getCategories);
+router.post("/talktoAIChatBox/:query", talktoChatGPT);
 
 module.exports = router;

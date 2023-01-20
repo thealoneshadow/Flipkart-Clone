@@ -4,13 +4,14 @@
 // const OpenAIApi = require("openai");
 const { Configuration, OpenAIApi } = require("openai");
 const { writeFileSync } = require("fs");
+require("dotenv").config();
+
+const config = new Configuration({
+	apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(config);
 
 exports.generateAIImage = async (prompt) => {
-	const config = new Configuration({
-		apiKey: "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",
-	});
-
-	const openai = new OpenAIApi(config);
 	const result = await openai.createImage({
 		prompt,
 		n: 1,
@@ -27,4 +28,12 @@ exports.generateAIImage = async (prompt) => {
 	// const buffer = Buffer.from(await blob.arrayBuffer());
 	// writeFileSync(`./img/${Date.now()}`, buffer);
 	return url;
+};
+
+exports.chatgpt = async (prompt) => {
+	const completion = await openai.createCompletion({
+		model: "text-davinci-003",
+		prompt: prompt,
+	});
+	return completion.data.choices[0].text;
 };
