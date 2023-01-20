@@ -1,6 +1,9 @@
 /** @format */
 
-const { requireSignin, userMiddleware } = require("../common-middleware");
+const {
+	requireSignin,
+	userMiddleware,
+} = require("../common-middleware/index.js");
 const { addOrder, getOrders, getOrder } = require("../controller/order");
 const router = require("express").Router();
 

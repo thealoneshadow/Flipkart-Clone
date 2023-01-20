@@ -1,9 +1,12 @@
 /** @format */
 
 const express = require("express");
-const { requireSignin, adminMiddleware } = require("../common-middleware");
+const {
+	requireSignin,
+	adminMiddleware,
+} = require("../common-middleware/index.js");
 const router = express.Router();
-const Product = require("../models/product");
+const Product = require("../models/product.js");
 const {
 	createProduct,
 	getProductsBySlug,
@@ -11,8 +14,8 @@ const {
 	deleteProductById,
 	getProducts,
 	getProductDetailsByCategory,
-} = require("../controller/product");
-const { upload } = require("../common-middleware");
+} = require("../controller/product.js");
+const { upload } = require("../common-middleware/index.js");
 // const multer = require("multer");
 // const shortid = require("shortid");
 // const path = require("path");

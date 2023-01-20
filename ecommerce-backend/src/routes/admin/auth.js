@@ -8,7 +8,7 @@ const {
 } = require("../../validators/auth");
 const { singup, signin, signout } = require("../../controller/admin/auth");
 const router = express.Router();
-const { requireSignin } = require("../../common-middleware");
+const { requireSignin } = require("../../common-middleware/index.js");
 
 router.post("/admin/signup", validateSignupRequest, isRequestValidated, singup);
 

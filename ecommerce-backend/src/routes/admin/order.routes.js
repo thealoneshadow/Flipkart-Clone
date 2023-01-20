@@ -1,7 +1,10 @@
 /** @format */
 
 const express = require("express");
-const { requireSignin, adminMiddleware } = require("../../common-middleware");
+const {
+	requireSignin,
+	adminMiddleware,
+} = require("../../common-middleware/index.js");
 const {
 	updateOrder,
 	getCustomerOrders,

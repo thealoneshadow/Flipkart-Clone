@@ -122,10 +122,8 @@ const MultiSlide = ({ data, timer, title }) => {
 							<Text style={{ fontWeight: 600, color: "#212121" }}>
 								{temp.name}
 							</Text>
-							<Text style={{ color: "green" }}>{temp.price}</Text>
-							<Text style={{ color: "#212121", opacity: ".6" }}>
-								{temp.description}
-							</Text>
+							<Text style={{ color: "green" }}>₹{temp.price}</Text>
+							<Text style={{ color: "#212121", opacity: ".6" }}></Text>
 						</Box>
 					</Link>
 				))}

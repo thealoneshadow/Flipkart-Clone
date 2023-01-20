@@ -6,7 +6,7 @@ const {
 	upload,
 	requireSignin,
 	adminMiddleware,
-} = require("../../common-middleware");
+} = require("../../common-middleware/index.js");
 const { createPage, getPage } = require("../../controller/admin/page");
 
 router.post(

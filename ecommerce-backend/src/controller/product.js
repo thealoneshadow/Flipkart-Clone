@@ -4,6 +4,7 @@ const shortid = require("shortid");
 const Product = require("../models/product");
 const slugify = require("slugify");
 const Category = require("../models/category");
+const generateAIImage = require("./generate.js");
 
 exports.createProduct = async (req, res) => {
 	// res.status(200).json({
@@ -147,6 +148,13 @@ exports.getProductDetailsByCategory = async (req, res) => {
 			const products = await Product.find({
 				category: req.params.productCategory,
 			}).exec();
+			// for (let i = 0; i < products.length; i++) {
+			// 	const url = await generateAIImage.generateAIImage(
+			// 		products[i].name + products[i].description
+			// 	);
+			// 	console.log(url);
+			// 	products[i].description = url;
+			// }
 			res.status(200).json({ products });
 		} catch (error) {
 			return res.status(400).json({
