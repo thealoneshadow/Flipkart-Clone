@@ -170,10 +170,10 @@ exports.getProductDetailsByCategory = async (req, res) => {
 };
 
 exports.talktoChatGPT = async (req, res) => {
-	console.log(req.params);
 	if (req.params) {
 		try {
 			const result = await generateAIImage.chatgpt(req.params.query);
+			console.log(result);
 			res.status(200).json({ result });
 		} catch (error) {
 			return res.status(400).json({

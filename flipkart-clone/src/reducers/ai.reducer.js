@@ -3,7 +3,7 @@
 import { productConstants } from "../actions/constants";
 
 const initialState = {
-	response: "",
+	response: "Hi there! How can I help you?",
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

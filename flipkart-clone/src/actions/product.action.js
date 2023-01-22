@@ -19,10 +19,8 @@ export const getProductsBySlug = (slug) => {
 
 export const getProductsByCategory = (category) => {
 	return async (dispatch) => {
-		console.log(1);
 		const res = await axios.get(`/allproducts/${category}`);
 		if (res.status === 200) {
-			console.log(2);
 			dispatch({
 				type: productConstants.GET_PRODUCTS_BY_SLUG,
 				payload: res.data,
@@ -82,21 +80,16 @@ export const getProductDetailsById = (payload) => {
 };
 
 export const talktoChatGPT = (payload) => {
-	console.log(payload);
 	return async (dispatch) => {
 		dispatch({ type: productConstants.TALK_TO_BOT_REQUEST });
 		let res;
 		try {
-			const { query } = payload;
-			//console.log(query);
 			res = await axios.post(`/talktoAIChatBox/${payload}`);
-			console.log(res);
 			dispatch({
 				type: productConstants.TALK_TO_BOT_SUCCESS,
-				payload: { productDetails: res },
+				payload: { response: res.data.result },
 			});
 		} catch (error) {
-			console.log(error);
 			dispatch({
 				type: productConstants.TALK_TO_BOT_FAILURE,
 				payload: { error: res },

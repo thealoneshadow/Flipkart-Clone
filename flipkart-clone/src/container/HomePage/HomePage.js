@@ -2,7 +2,7 @@
 import Header from "../../components/Header/Header";
 import Layout from "../../components/Layout/Layout";
 import MenuHeader from "../../components/MenuHeader/MenuHeader";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Box, styled } from "@mui/material";
 
@@ -13,6 +13,7 @@ import MidSection from "./Home/MidSection";
 import Slide from "./Home/Slide";
 import { useSelector, useDispatch } from "react-redux"; // hooks
 import { getProductsByCategory, talktoChatGPT } from "../../actions";
+import ChatBoxModal from "../../components/ChatBoxModal/ChatBoxModal";
 const Component = styled(Box)`
 	padding: 20px 10px;
 	background: #f2f2f2;
@@ -21,11 +22,9 @@ const Component = styled(Box)`
 export default function HomePage() {
 	const getAllProducts = useSelector((state) => state.product);
 	const { products, error } = getAllProducts;
-	console.log(products);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getProductsByCategory("63c695ffa05257ccbe391ced"));
-		console.log(dispatch(talktoChatGPT("How are you?")));
 	}, [dispatch]);
 
 	return (
@@ -59,6 +58,7 @@ export default function HomePage() {
 					multi={true}
 				/>
 			</Component>
+			<ChatBoxModal></ChatBoxModal>
 		</Layout>
 	);
 }
