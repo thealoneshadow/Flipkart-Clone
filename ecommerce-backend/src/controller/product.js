@@ -17,7 +17,7 @@ exports.createProduct = async (req, res) => {
 	if (req.files.length > 0) {
 		req.files.map((file) => {
 			productPictures.push({
-				img: file.filename,
+				img: file.location,
 			});
 		});
 	}
@@ -43,6 +43,7 @@ exports.createProduct = async (req, res) => {
 				status: 200,
 				message: "Product Created",
 				data: doc,
+				file: req.files,
 			});
 		}
 	});

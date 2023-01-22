@@ -16,7 +16,7 @@ const {
 	getProductDetailsByCategory,
 	talktoChatGPT,
 } = require("../controller/product.js");
-const { upload } = require("../common-middleware/index.js");
+const { upload, uploadS3 } = require("../common-middleware/index.js");
 // const multer = require("multer");
 // const shortid = require("shortid");
 // const path = require("path");
@@ -36,7 +36,7 @@ router.post(
 	"/product/create",
 	requireSignin,
 	adminMiddleware,
-	upload.array("productPicture"),
+	uploadS3.array("productPicture"),
 	createProduct
 );
 
