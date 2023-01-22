@@ -24,7 +24,7 @@ export default function HomePage() {
 	const { products, error } = getAllProducts;
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getProductsByCategory("63c695ffa05257ccbe391ced"));
+		dispatch(getProductsByCategory("63640790f082695720e8002a"));
 	}, [dispatch]);
 
 	return (

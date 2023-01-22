@@ -10,8 +10,18 @@ import { BiRupee } from "react-icons/bi";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { MaterialButton } from "../../components/MaterialUI/MaterialUI";
 import "./ProductDetailsPage.css";
-import { generatePublicUrl } from "../../urlConfig";
 import { addToCart } from "../../actions";
+import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
+import {
+	Box,
+	Typography,
+	Table,
+	TableBody,
+	TableRow,
+	TableCell,
+	styled,
+} from "@mui/material";
+import { LocalOffer as Badge } from "@mui/icons-material";
 
 export default function ProductDetailsPage(props) {
 	const dispatch = useDispatch();
@@ -31,6 +41,33 @@ export default function ProductDetailsPage(props) {
 		return null;
 	}
 
+	const SmallText = styled(Box)`
+		font-size: 14px;
+		vertical-align: baseline;
+		& > p {
+			font-size: 14px;
+			margin-top: 10px;
+		}
+	`;
+
+	const ColumnText = styled(TableRow)`
+		font-size: 14px;
+		vertical-align: baseline;
+		& > td {
+			font-size: 14px;
+			margin-top: 10px;
+		}
+	`;
+
+	const StyledBadge = styled(Badge)`
+		margin-right: 10px;
+		color: #00cc00;
+		font-size: 15px;
+	`;
+	const adURL =
+		"https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50";
+	const date = new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000);
+
 	return (
 		<Layout>
 			{/* <div>{product.productDetails.name}</div> */}
@@ -39,7 +76,7 @@ export default function ProductDetailsPage(props) {
 					<div className="verticalImageStack">
 						{product.productDetails.productPictures.map((thumb, index) => (
 							<div className="thumbnail">
-								<img src={generatePublicUrl(thumb.img)} alt={thumb.img} />
+								<img src={thumb.img} alt={thumb.img} />
 							</div>
 						))}
 						{/* <div className="thumbnail active">
@@ -53,9 +90,7 @@ export default function ProductDetailsPage(props) {
 						<div className="productDescImgContainer">
 							<img
 								className="productDescImgContainer"
-								src={generatePublicUrl(
-									product.productDetails.productPictures[0].img
-								)}
+								src={product.productDetails.productPictures[0].img}
 								alt={`${product.productDetails.productPictures[0].img}`}
 							/>
 						</div>
@@ -74,7 +109,6 @@ export default function ProductDetailsPage(props) {
 									const { _id, name, price } = product.productDetails;
 									const img = product.productDetails.productPictures[0].img;
 									dispatch(addToCart({ _id, name, price, img }));
-									navigate(`/cart`);
 								}}
 							/>
 							<MaterialButton
@@ -85,6 +119,12 @@ export default function ProductDetailsPage(props) {
 									marginLeft: "5px",
 								}}
 								icon={<AiFillThunderbolt />}
+								onClick={() => {
+									const { _id, name, price } = product.productDetails;
+									const img = product.productDetails.productPictures[0].img;
+									dispatch(addToCart({ _id, name, price, img }));
+									navigate(`/cart`);
+								}}
 							/>
 						</div>
 					</div>
@@ -135,7 +175,64 @@ export default function ProductDetailsPage(props) {
 							</span>
 							{/* <span>i</span> */}
 						</div>
-						<div>
+						<Typography>Available offers</Typography>
+						<SmallText>
+							<Typography>
+								<StyledBadge />
+								Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit
+								Card
+							</Typography>
+							<Typography>
+								<StyledBadge />
+								Bank Offer 10% Off on Bank of Baroda Mastercard debit card first
+								time transaction, Terms and Condition apply
+							</Typography>
+							<Typography>
+								<StyledBadge />
+								Purchase this Furniture or Appliance and Get Extra ₹500 Off on
+								Select ACs
+							</Typography>
+							<Typography>
+								<StyledBadge />
+								Partner OfferExtra 10% off upto ₹500 on next furniture purchase
+							</Typography>
+						</SmallText>
+						<Table>
+							<TableBody>
+								<ColumnText>
+									<TableCell style={{ color: "#878787" }}>Delivery</TableCell>
+									<TableCell style={{ fontWeight: 600 }}>
+										Delivery by {date.toDateString()} | ₹40
+									</TableCell>
+								</ColumnText>
+								<ColumnText>
+									<TableCell style={{ color: "#878787" }}>Warranty</TableCell>
+									<TableCell>No Warranty</TableCell>
+								</ColumnText>
+								<ColumnText>
+									<TableCell style={{ color: "#878787" }}>Seller</TableCell>
+									<TableCell>
+										<span style={{ color: "#2874f0" }}>SuperComNet</span>
+										<Typography>GST invoice available</Typography>
+										<Typography>
+											View more sellers starting from ₹329
+										</Typography>
+									</TableCell>
+								</ColumnText>
+								<TableRow>
+									<TableCell colSpan={2}>
+										<img src={adURL} style={{ width: 390 }} />
+									</TableCell>
+								</TableRow>
+								<ColumnText>
+									<TableCell style={{ color: "#878787" }}>
+										Description
+									</TableCell>
+									<TableCell>{product.productDetails.description}</TableCell>
+								</ColumnText>
+							</TableBody>
+						</Table>
+						{/* <div>
 							<p
 								style={{
 									color: "#212121",
@@ -166,7 +263,7 @@ export default function ProductDetailsPage(props) {
 									{product.productDetails.description}
 								</span>
 							</p>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>

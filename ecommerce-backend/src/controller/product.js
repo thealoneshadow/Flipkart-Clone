@@ -50,6 +50,7 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.getProductsBySlug = (req, res) => {
+	console.log(req.params);
 	const { slug } = req.params;
 	Category.findOne({ slug: slug })
 		.select("_id type")
@@ -65,7 +66,9 @@ exports.getProductsBySlug = (req, res) => {
 					}
 
 					if (category.type) {
+						console.log(products);
 						if (products.length > 0) {
+							console.log(products);
 							res.status(200).json({
 								products,
 								priceRange: {
@@ -92,6 +95,7 @@ exports.getProductsBySlug = (req, res) => {
 								},
 							});
 						}
+						res.status(200).json({ products });
 					} else {
 						res.status(200).json({ products });
 					}
