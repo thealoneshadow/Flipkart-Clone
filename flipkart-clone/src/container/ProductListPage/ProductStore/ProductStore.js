@@ -6,17 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductsBySlug } from "../../../actions";
 import { useLocation } from "react-router-dom";
 import "./ProductStore.css";
-import { Link } from "react-router-dom";
-import Card from "../../../components/UI/Card/Card";
-import Price from "../../../components/UI/Price";
-import Rating from "../../../components/UI/Rating";
 import Carousel from "react-multi-carousel";
 import {
 	CustomLeftArrow,
 	CustomRightArrow,
 } from "../../../components/UI/Arrows";
-import { Divider, Box, styled } from "@mui/material";
+import { Divider, Box, styled, Typography } from "@mui/material";
 import { CarouselHeading } from "../../../components/UI/listProducts";
+import { PriceReview } from "../../../components/UI/listProducts";
 
 export default function ProductStore() {
 	const product = useSelector((state) => state.product);
@@ -59,7 +56,9 @@ export default function ProductStore() {
 							<Component>
 								<CarouselHeading
 									title={
-										slug.split("-")[0] + " Best Mobile Under " + priceRange[key]
+										slug.split("-")[0] +
+										" Best Mobile Under ₹" +
+										priceRange[key]
 									}
 								/>
 								<Divider />
@@ -81,31 +80,13 @@ export default function ProductStore() {
 									itemClass="carousel-item-padding-40-px"
 								>
 									{product.productsByPrice[key].map((product) => (
-										<Link
-											to={`/${product.slug}/${product._id}/page`}
-											className="productContainer"
-										>
-											<div className="productImgContainer">
-												<img src={product.productPictures[0].img} alt="" />
-											</div>
-											<div className="productInfo">
-												<div style={{ margin: "5px 0" }}>{product.name}</div>
-												<div>
-													<Rating value="4.3" />
-													&nbsp;&nbsp;
-													<span
-														style={{
-															color: "#777",
-															fontWeight: "500",
-															fontSize: "12px",
-														}}
-													>
-														(3353)
-													</span>
-												</div>
-												<Price value={product.price} />
-											</div>
-										</Link>
+										<PriceReview
+											url={`/${product.name}/${product._id}/page`}
+											image={product.productPictures[0].img}
+											title={product.name}
+											price={product.price}
+											mrp={product.maximumRetailPrice}
+										/>
 									))}
 								</Carousel>
 							</Component>

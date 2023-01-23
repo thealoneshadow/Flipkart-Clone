@@ -5,11 +5,11 @@ import { Button, Divider, Box, Typography, styled } from "@mui/material";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Countdown from "react-countdown";
-import { Link } from "react-router-dom";
 import {
 	CustomLeftArrow,
 	CustomRightArrow,
 } from "../../../components/UI/Arrows";
+import { PriceReview } from "../../../components/UI/listProducts";
 
 const responsive = {
 	desktop: {
@@ -58,16 +58,6 @@ const ViewAllButton = styled(Button)`
 	background-color: #2874f0;
 	border-radius: 2px;
 	font-size: 13px;
-`;
-
-const Image = styled("img")({
-	width: "auto",
-	height: 150,
-});
-
-const Text = styled(Typography)`
-	font-size: 14px;
-	margin-top: 5px;
 `;
 
 const RenderTimer = styled(Box)(({ theme }) => ({
@@ -120,21 +110,14 @@ const MultiSlide = ({ data, timer, title }) => {
 				dotListClass="custom-dot-list-style"
 				itemClass="carousel-item-padding-40-px"
 			>
-				{data.map((temp, index) => (
-					<Link
-						to={`/${temp.name}/${temp._id}/page`}
-						style={{ textDecoration: "none" }}
-						key={index}
-					>
-						<Box textAlign="center" style={{ padding: "25px 15px" }}>
-							<Image src={temp.productPictures[0].img} />
-							<Text style={{ fontWeight: 600, color: "#212121" }}>
-								{temp.name}
-							</Text>
-							<Text style={{ color: "green" }}>₹{temp.price}</Text>
-							<Text style={{ color: "#212121", opacity: ".6" }}></Text>
-						</Box>
-					</Link>
+				{data.map((product, index) => (
+					<PriceReview
+						url={`/${product.name}/${product._id}/page`}
+						image={product.productPictures[0].img}
+						title={product.name}
+						price={product.price}
+						mrp={product.maximumRetailPrice}
+					/>
 				))}
 			</Carousel>
 		</Component>
