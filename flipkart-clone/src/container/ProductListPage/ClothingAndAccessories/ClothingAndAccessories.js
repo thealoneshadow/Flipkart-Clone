@@ -1,26 +1,27 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsBySlug } from "../../../actions";
 import Card from "../../../components/UI/Card/Card";
 import { BiRupee } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 import "./ClothingAndAccessories.css";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function ClothingAndAccessories
  **/
 
 const ClothingAndAccessories = (props) => {
 	const product = useSelector((state) => state.product);
 	const dispatch = useDispatch();
-
+	const location = useLocation();
+	const slug = location.pathname.split("/")[1];
+	console.log(slug);
 	useEffect(() => {
-		const { match } = props;
-		dispatch(getProductsBySlug(match.params.slug));
+		dispatch(getProductsBySlug(slug));
 	}, []);
 
 	return (
@@ -36,7 +37,7 @@ const ClothingAndAccessories = (props) => {
 					<div className="caContainer">
 						<Link
 							className="caImgContainer"
-							to={`/${product.slug}/${product._id}/p`}
+							to={`/${product.slug}/${product._id}/page`}
 						>
 							<img src={product.productPictures[0].img} />
 						</Link>
@@ -54,4 +55,4 @@ const ClothingAndAccessories = (props) => {
 	);
 };
 
-export default ClothingAndAccessories;
+export default memo(ClothingAndAccessories);

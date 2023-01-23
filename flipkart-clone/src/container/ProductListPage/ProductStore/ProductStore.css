@@ -17,6 +17,10 @@
 .productContainer {
 	width: 200px;
 	margin: 0 10px;
+	display: "block";
+	color: "#000";
+	font-weight: "500";
+	text-decoration: "none";
 }
 
 .productContainer .productImgContainer {

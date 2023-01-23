@@ -3,11 +3,6 @@
 import React, { useState } from "react";
 import "./MaterialUI.css";
 
-/**
- * @author Rizwan Khan
- * @function
- **/
-
 const Modal = (props) => {
 	if (!props.visible) {
 		return null;
@@ -93,7 +88,17 @@ const MaterialButton = (props) => {
 				style={{ backgroundColor: props.bgColor, color: props.textColor }}
 				className="materialButton"
 				onClick={props.onClick}
+				icon={props.icon}
 			>
+				<span
+					style={{
+						margin: "2px",
+						fontSize: "20px",
+						verticalAlign: "middle",
+					}}
+				>
+					{props.icon}
+				</span>
 				{props.title && props.title}
 			</button>
 		</div>

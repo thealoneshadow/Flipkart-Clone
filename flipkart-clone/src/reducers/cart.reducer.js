@@ -9,6 +9,7 @@ const initState = {
 		//     name: 'Samsung mobile',
 		//     img: 'some.jpg',
 		//     price: 200,
+		//	   maximumRetailPrice: 300,
 		//     qty: 1,
 		// }
 	},

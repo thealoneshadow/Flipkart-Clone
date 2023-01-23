@@ -25,6 +25,7 @@ const getCartItems = () => {
 };
 
 export const addToCart = (product, newQty = 1) => {
+	console.log(product);
 	return async (dispatch) => {
 		const {
 			cart: { cartItems },
@@ -53,6 +54,8 @@ export const addToCart = (product, newQty = 1) => {
 					{
 						product: product._id,
 						quantity: qty,
+						price: product.price,
+						maximumRetailPrice: product.maximumRetailPrice,
 					},
 				],
 			};

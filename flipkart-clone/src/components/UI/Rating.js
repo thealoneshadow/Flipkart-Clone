@@ -4,7 +4,7 @@ import React from "react";
 import { IoIosStar } from "react-icons/io";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function Rating
  **/
 

@@ -6,6 +6,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
+import {
+	CustomLeftArrow,
+	CustomRightArrow,
+} from "../../../components/UI/Arrows";
 
 const responsive = {
 	desktop: {
@@ -25,6 +29,9 @@ const responsive = {
 const Component = styled(Box)`
 	margin-top: 10px;
 	background: #ffffff;
+	border-radius: 3px;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+		rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 `;
 
 const Deal = styled(Box)`
@@ -100,12 +107,14 @@ const MultiSlide = ({ data, timer, title }) => {
 				swipeable={false}
 				draggable={false}
 				responsive={responsive}
-				centerMode={true}
+				centerMode={false}
 				infinite={true}
 				autoPlay={true}
 				autoPlaySpeed={10000}
 				keyBoardControl={true}
 				showDots={false}
+				customRightArrow={<CustomRightArrow />}
+				customLeftArrow={<CustomLeftArrow />}
 				containerClass="carousel-container"
 				// removeArrowOnDeviceType={["tablet", "mobile"]}
 				dotListClass="custom-dot-list-style"
@@ -113,7 +122,7 @@ const MultiSlide = ({ data, timer, title }) => {
 			>
 				{data.map((temp, index) => (
 					<Link
-						to={`product/${temp._id}`}
+						to={`/${temp.name}/${temp._id}/page`}
 						style={{ textDecoration: "none" }}
 						key={index}
 					>

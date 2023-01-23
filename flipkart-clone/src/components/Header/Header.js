@@ -27,7 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, signout, signup as _signup } from "../../actions";
 import Cart from "../UI/Cart";
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function Header
  **/
 
@@ -208,7 +208,7 @@ const Header = (props) => {
 			</Modal>
 			<div className="subHeader">
 				<div className="logo">
-					<a href="">
+					<a href="/">
 						<img src={flipkartLogo} className="logoimage" alt="" />
 					</a>
 					<a style={{ marginTop: "-10px" }}>

@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import "./CheckoutPage.css";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function CheckoutPage
  **/
 

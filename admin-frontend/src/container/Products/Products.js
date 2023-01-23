@@ -13,6 +13,7 @@ const Products = (props) => {
 	const [name, setName] = useState("");
 	const [quantity, setQuantity] = useState("");
 	const [price, setPrice] = useState("");
+	const [maximumRetailPrice, setMaximumRetailPrice] = useState("");
 	const [description, setDescription] = useState("");
 	const [categoryId, setCategoryId] = useState("");
 	const [productPictures, setProductPictures] = useState([]);
@@ -46,6 +47,7 @@ const Products = (props) => {
 		form.append("name", name);
 		form.append("quantity", quantity);
 		form.append("price", price);
+		form.append("maximumRetailPrice", maximumRetailPrice);
 		form.append("description", description);
 		form.append("category", categoryId);
 
@@ -68,7 +70,12 @@ const Products = (props) => {
 	};
 
 	const handleProductPictures = (e) => {
-		setProductPictures([...productPictures, e.target.files[0]]);
+		let files = [];
+		for (let i = 0; i < e.target.files.length; i++) {
+			files.push(e.target.files[i]);
+		}
+		productPictures.push(...files);
+		setProductPictures(productPictures);
 	};
 
 	const renderProducts = () => {
@@ -81,6 +88,7 @@ const Products = (props) => {
 						<th>Price</th>
 						<th>Qunatity</th>
 						<th>Category</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -95,11 +103,18 @@ const Products = (props) => {
 									<td>{product.price}</td>
 									<td>{product.quantity}</td>
 									<td>{product.category.name}</td>
-									<td>
-										<button onClick={() => showProductDetailsModal(product)}>
+									<td
+										style={{ display: "flex", justifyContent: "space-between" }}
+									>
+										<button
+											className="btn btn-info"
+											onClick={() => showProductDetailsModal(product)}
+										>
 											info
 										</button>
 										<button
+											className="btn btn-danger"
+											style={{ marginLeft: "10px" }}
 											onClick={() => {
 												const payload = {
 													productId: product._id,
@@ -107,7 +122,7 @@ const Products = (props) => {
 												dispatch(deleteProductById(payload));
 											}}
 										>
-											del
+											Delete
 										</button>
 									</td>
 								</tr>
@@ -145,6 +160,12 @@ const Products = (props) => {
 					onChange={(e) => setPrice(e.target.value)}
 				/>
 				<Input
+					label="Price"
+					value={maximumRetailPrice}
+					placeholder={`Product MRP`}
+					onChange={(e) => setMaximumRetailPrice(e.target.value)}
+				/>
+				<Input
 					label="Description"
 					value={description}
 					placeholder={`Product Description`}
@@ -171,6 +192,7 @@ const Products = (props) => {
 				<Input
 					type="file"
 					name="productPicture"
+					multiple
 					onChange={handleProductPictures}
 				/>
 			</Modal>
@@ -229,10 +251,7 @@ const Products = (props) => {
 						<div style={{ display: "flex" }}>
 							{productDetails.productPictures.map((picture) => (
 								<div className="productImgContainer">
-									<img
-										src={generatePublicUrl(picture.img)}
-										alt="productImage"
-									/>
+									<img src={picture.img} alt="productImage" />
 								</div>
 							))}
 						</div>
@@ -246,9 +265,22 @@ const Products = (props) => {
 		<Layout sidebar>
 			<Row>
 				<Col md={12}>
-					<div style={{ display: "flex", justifyContent: "space-between" }}>
-						<h3>Product</h3>
-						<button onClick={handleShow}>Add</button>
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+					>
+						<h3
+							style={{
+								fontWeight: "600",
+							}}
+						>
+							Products
+						</h3>
+						<button className="btn btn-success" onClick={handleShow}>
+							Add
+						</button>
 					</div>
 				</Col>
 			</Row>

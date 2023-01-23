@@ -45,7 +45,7 @@ function App() {
 						element={<OrderDetailsPage />}
 					/>
 					<Route
-						path="/:productSlug/:productId/p"
+						path="/:productSlug/:productId/page"
 						element={<ProductDetailsPage />}
 					/>
 					<Route path="/:slug" element={<ProductList />} />

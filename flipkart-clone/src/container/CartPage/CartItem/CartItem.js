@@ -5,14 +5,14 @@ import { generatePublicUrl } from "../../../urlConfig";
 import "./CartItem.css";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function CartItem
  **/
 
 const CartItem = (props) => {
 	const [qty, setQty] = useState(props.cartItem.qty);
 
-	const { _id, name, price, img } = props.cartItem;
+	const { _id, name, price, maximumRetailPrice, img } = props.cartItem;
 
 	const onQuantityIncrement = () => {
 		setQty(qty + 1);
@@ -29,7 +29,7 @@ const CartItem = (props) => {
 		<div className="cartItemContainer">
 			<div className="flexRow">
 				<div className="cartProImgContainer">
-					<img src={generatePublicUrl(img)} alt={""} />
+					<img src={img} alt={""} />
 				</div>
 				<div className="cartItemDetails">
 					<div>

@@ -12,7 +12,15 @@ exports.createProduct = async (req, res) => {
 	// 	body: req.body,
 	// });
 
-	const { name, price, description, category, quantity, createdBy } = req.body;
+	const {
+		name,
+		price,
+		maximumRetailPrice,
+		description,
+		category,
+		quantity,
+		createdBy,
+	} = req.body;
 	let productPictures = [];
 	if (req.files.length > 0) {
 		req.files.map((file) => {
@@ -25,6 +33,7 @@ exports.createProduct = async (req, res) => {
 		name: name,
 		slug: slugify(name),
 		price,
+		maximumRetailPrice,
 		quantity,
 		description,
 		productPictures,
@@ -50,7 +59,6 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.getProductsBySlug = (req, res) => {
-	console.log(req.params);
 	const { slug } = req.params;
 	Category.findOne({ slug: slug })
 		.select("_id type")
@@ -66,9 +74,7 @@ exports.getProductsBySlug = (req, res) => {
 					}
 
 					if (category.type) {
-						console.log(products);
 						if (products.length > 0) {
-							console.log(products);
 							res.status(200).json({
 								products,
 								priceRange: {
@@ -95,7 +101,6 @@ exports.getProductsBySlug = (req, res) => {
 								},
 							});
 						}
-						res.status(200).json({ products });
 					} else {
 						res.status(200).json({ products });
 					}
@@ -140,7 +145,9 @@ exports.deleteProductById = (req, res) => {
 
 exports.getProducts = async (req, res) => {
 	const products = await Product.find({ createdBy: req.user._id })
-		.select("_id name price quantity slug description productPictures category")
+		.select(
+			"_id name price maximumRetailPrice quantity slug description productPictures category"
+		)
 		.populate({ path: "category", select: "_id name" })
 		.exec();
 

@@ -1,0 +1,8 @@
+/** @format */
+
+.priceDetailsMain {
+	background: var(--color-white-bg);
+	border-radius: 2px;
+	min-height: 47px;
+	box-shadow: rgb(0 0 0 / 20%) 0px 1px 1px 0px;
+}

@@ -4,7 +4,7 @@ import React from "react";
 import { BiRupee } from "react-icons/bi";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function Price
  **/
 

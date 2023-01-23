@@ -4,6 +4,10 @@ import { styled } from "@mui/material";
 
 import { bannerData } from "../DummyData";
 import Carousel from "react-multi-carousel";
+import {
+	CustomLeftArrow,
+	CustomRightArrow,
+} from "../../../components/UI/Arrows";
 
 const responsive = {
 	desktop: {
@@ -41,6 +45,8 @@ const Banner = () => {
 			keyBoardControl={true}
 			showDots={false}
 			slidesToSlide={1}
+			customLeftArrow={<CustomLeftArrow />}
+			customRightArrow={<CustomRightArrow />}
 			containerClass="carousel-container"
 			dotListClass="custom-dot-list-style"
 			itemClass="carousel-item-padding-40-px"

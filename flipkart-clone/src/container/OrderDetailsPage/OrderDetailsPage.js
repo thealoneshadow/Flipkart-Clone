@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import "./OrderDetailsPage.css";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function OrderDetails
  **/
 

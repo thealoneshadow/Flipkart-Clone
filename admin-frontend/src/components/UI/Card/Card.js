@@ -4,7 +4,7 @@ import React from "react";
 import "./Card.css";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function Card
  **/
 

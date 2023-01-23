@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState, memo } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetailsById } from "../../actions";
@@ -11,7 +11,6 @@ import { AiFillThunderbolt } from "react-icons/ai";
 import { MaterialButton } from "../../components/MaterialUI/MaterialUI";
 import "./ProductDetailsPage.css";
 import { addToCart } from "../../actions";
-import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
 import {
 	Box,
 	Typography,
@@ -23,12 +22,13 @@ import {
 } from "@mui/material";
 import { LocalOffer as Badge } from "@mui/icons-material";
 
-export default function ProductDetailsPage(props) {
+function ProductDetailsPage(props) {
 	const dispatch = useDispatch();
 	const product = useSelector((state) => state.product);
 	const location = useLocation();
 	const productId = location.pathname.split("/")[2];
 	const navigate = useNavigate();
+	const [currentImage, setCurrentImage] = useState("");
 	useEffect(() => {
 		const payload = {
 			params: {
@@ -40,6 +40,14 @@ export default function ProductDetailsPage(props) {
 	if (Object.keys(product.productDetails).length === 0) {
 		return null;
 	}
+
+	const changeCurrentImage = (img) => {
+		setCurrentImage(img);
+	};
+
+	const showDiscount = (price, mrp) => {
+		return Math.round((1 - price / mrp) * 100);
+	};
 
 	const SmallText = styled(Box)`
 		font-size: 14px;
@@ -75,28 +83,30 @@ export default function ProductDetailsPage(props) {
 				<div className="flexRow">
 					<div className="verticalImageStack">
 						{product.productDetails.productPictures.map((thumb, index) => (
-							<div className="thumbnail">
+							<div
+								className="thumbnail"
+								onClick={() => changeCurrentImage(thumb.img)}
+								key={index}
+							>
 								<img src={thumb.img} alt={thumb.img} />
 							</div>
 						))}
-						{/* <div className="thumbnail active">
-                {
-                  product.productDetails.productPictures.map((thumb, index) => 
-                  <img src={generatePublicUrl(thumb.img)} alt={thumb.img} />)
-                }
-              </div> */}
 					</div>
 					<div className="productDescContainer">
 						<div className="productDescImgContainer">
 							<img
 								className="productDescImgContainer"
-								src={product.productDetails.productPictures[0].img}
-								alt={`${product.productDetails.productPictures[0].img}`}
+								src={
+									currentImage === ""
+										? product.productDetails.productPictures[0].img
+										: currentImage
+								}
+								alt={currentImage}
 							/>
 						</div>
 
 						{/* action buttons */}
-						<div className="flexRow">
+						<div style={{ marginTop: "7px" }} className="flexRow">
 							<MaterialButton
 								title="ADD TO CART"
 								bgColor="#ff9f00"
@@ -106,9 +116,12 @@ export default function ProductDetailsPage(props) {
 								}}
 								icon={<IoMdCart />}
 								onClick={() => {
-									const { _id, name, price } = product.productDetails;
+									const { _id, name, maximumRetailPrice, price } =
+										product.productDetails;
 									const img = product.productDetails.productPictures[0].img;
-									dispatch(addToCart({ _id, name, price, img }));
+									dispatch(
+										addToCart({ _id, name, price, maximumRetailPrice, img })
+									);
 								}}
 							/>
 							<MaterialButton
@@ -120,9 +133,12 @@ export default function ProductDetailsPage(props) {
 								}}
 								icon={<AiFillThunderbolt />}
 								onClick={() => {
-									const { _id, name, price } = product.productDetails;
+									const { _id, name, maximumRetailPrice, price } =
+										product.productDetails;
 									const img = product.productDetails.productPictures[0].img;
-									dispatch(addToCart({ _id, name, price, img }));
+									dispatch(
+										addToCart({ _id, name, price, maximumRetailPrice, img })
+									);
 									navigate(`/cart`);
 								}}
 							/>
@@ -142,7 +158,7 @@ export default function ProductDetailsPage(props) {
 								<IoIosArrowForward />
 							</li>
 							<li>
-								<a href="#">Samsung</a>
+								<a href="#">{product.productDetails.name.split(" ")[0]}</a>
 								<IoIosArrowForward />
 							</li>
 							<li>
@@ -151,28 +167,48 @@ export default function ProductDetailsPage(props) {
 						</ul>
 					</div>
 					{/* product description */}
-					<div className="productDetails">
+					<div className="productDetails" style={{ marginTop: ".6rem" }}>
 						<p className="productTitle">{product.productDetails.name}</p>
-						<div>
+						<div style={{ marginTop: ".5rem" }}>
 							<span className="ratingCount">
 								4.3 <IoIosStar />
 							</span>
 							<span className="ratingNumbersReviews">
 								72,234 Ratings & 8,140 Reviews
 							</span>
+							<img
+								height="21"
+								src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
+								className="flipkartAssured-image"
+							></img>
 						</div>
 						<div className="extraOffer">
 							Extra <BiRupee />
-							4500 off{" "}
+							{product.productDetails.maximumRetailPrice -
+								product.productDetails.price}{" "}
+							off{" "}
 						</div>
 						<div className="flexRow priceContainer">
-							<span className="price">
-								<BiRupee />
-								{product.productDetails.price}
-							</span>
-							<span className="discount" style={{ margin: "0 10px" }}>
+							<Typography>
+								<span style={{ fontSize: 28, fontWeight: 500 }}>
+									₹{product.productDetails.price}
+								</span>
+								&nbsp;&nbsp;&nbsp;
+								<span style={{ color: "#878787" }}>
+									<strike>₹{product.productDetails.maximumRetailPrice}</strike>
+								</span>
+								&nbsp;&nbsp;&nbsp;
+								<span style={{ color: "#388E3C", fontWeight: 500 }}>
+									{showDiscount(
+										product.productDetails.price,
+										product.productDetails.maximumRetailPrice
+									)}
+									% off
+								</span>
+							</Typography>
+							{/* <span className="discount" style={{ margin: "0 10px" }}>
 								22% off
-							</span>
+							</span> */}
 							{/* <span>i</span> */}
 						</div>
 						<Typography>Available offers</Typography>
@@ -202,12 +238,13 @@ export default function ProductDetailsPage(props) {
 								<ColumnText>
 									<TableCell style={{ color: "#878787" }}>Delivery</TableCell>
 									<TableCell style={{ fontWeight: 600 }}>
-										Delivery by {date.toDateString()} | ₹40
+										Delivery by {date.toDateString()} |{" "}
+										<span style={{ color: "#00cc00" }}>Free</span>
 									</TableCell>
 								</ColumnText>
 								<ColumnText>
 									<TableCell style={{ color: "#878787" }}>Warranty</TableCell>
-									<TableCell>No Warranty</TableCell>
+									<TableCell>1 Year manufacturing warranty</TableCell>
 								</ColumnText>
 								<ColumnText>
 									<TableCell style={{ color: "#878787" }}>Seller</TableCell>
@@ -215,7 +252,8 @@ export default function ProductDetailsPage(props) {
 										<span style={{ color: "#2874f0" }}>SuperComNet</span>
 										<Typography>GST invoice available</Typography>
 										<Typography>
-											View more sellers starting from ₹329
+											View more sellers starting from ₹
+											{product.productDetails.price}
 										</Typography>
 									</TableCell>
 								</ColumnText>
@@ -270,3 +308,5 @@ export default function ProductDetailsPage(props) {
 		</Layout>
 	);
 }
+
+export default memo(ProductDetailsPage);

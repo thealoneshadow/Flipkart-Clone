@@ -29,7 +29,7 @@ export default function HomePage() {
 
 	return (
 		<Layout>
-			<Component>
+			<Component style={{ background: "#f1f3f6" }}>
 				<Banner />
 				<MidSlide products={products} />
 				<MidSection />

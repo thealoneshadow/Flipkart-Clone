@@ -9,7 +9,7 @@ import Card from "../../components/UI/Card/Card";
 import "./Orders.css";
 
 /**
- * @author
+ * @author theAloneshadow(Divyanshu Goyal)
  * @function Orders
  **/
 
