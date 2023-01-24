@@ -19,7 +19,7 @@ export const getProductsBySlug = (slug) => {
 
 export const getProductsByCategory = (category) => {
 	return async (dispatch) => {
-		const res = await axios.get(`/allproducts/${category}`);
+		const res = await axios.get(`/allproducts`);
 		if (res.status === 200) {
 			dispatch({
 				type: productConstants.GET_PRODUCTS_BY_SLUG,

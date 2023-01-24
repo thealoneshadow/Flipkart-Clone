@@ -33,8 +33,8 @@ exports.addCategory = (req, res) => {
 	};
 
 	if (req.file) {
-		categoryObj.categoryImage =
-			process.env.API + "/public/" + req.file.filename;
+		categoryObj.categoryImage = req.file.location;
+		//process.env.API + "/public/" + req.file.filename;
 	}
 
 	if (req.body.parentId) {
@@ -53,6 +53,7 @@ exports.addCategory = (req, res) => {
 				status: 200,
 				message: "Category Created",
 				data: doc,
+				file: req.files,
 			});
 		}
 	});

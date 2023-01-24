@@ -12,6 +12,9 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
 }
 
 .menuHeader > ul {
@@ -38,8 +41,12 @@
 	left: 0;
 	right: 0;
 	display: none;
+	left: auto;
+	right: auto;
 	border-radius: 3px;
 	z-index: 1;
+	align-items: center;
+	justify-content: center;
 	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
 		rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }

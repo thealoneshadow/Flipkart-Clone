@@ -42,7 +42,7 @@ router.post(
 
 router.get("/products/:slug", getProductsBySlug);
 router.get("/product/:productId", getProductDetailsById);
-router.get("/allproducts/:productCategory", getProductDetailsByCategory);
+router.get("/allproducts", getProductDetailsByCategory);
 router.delete(
 	"/product/deleteProductById",
 	requireSignin,

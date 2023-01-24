@@ -15,6 +15,7 @@ const {
 const multer = require("multer");
 const shortid = require("shortid");
 const path = require("path");
+const { uploadS3 } = require("../common-middleware/index.js");
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -25,13 +26,11 @@ const storage = multer.diskStorage({
 	},
 });
 
-const upload = multer({ storage });
-
 router.post(
 	"/category/create",
 	requireSignin,
 	adminMiddleware,
-	upload.single("categoryImage"),
+	uploadS3.single("categoryImage"),
 	addCategory
 );
 router.get("/category/getCategory", getCategories);
@@ -39,7 +38,7 @@ router.post(
 	"/category/update",
 	requireSignin,
 	adminMiddleware,
-	upload.array("categoryImage"),
+	uploadS3.array("categoryImage"),
 	updateCatgories
 );
 router.post("/category/delete", deleteCategories);

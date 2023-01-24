@@ -22,9 +22,10 @@ const Component = styled(Box)`
 export default function HomePage() {
 	const getAllProducts = useSelector((state) => state.product);
 	const { products, error } = getAllProducts;
+	console.log(products);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getProductsByCategory("63640790f082695720e8002a"));
+		dispatch(getProductsByCategory(""));
 	}, [dispatch]);
 
 	return (

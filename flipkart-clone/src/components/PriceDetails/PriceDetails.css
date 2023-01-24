@@ -4,5 +4,8 @@
 	background: var(--color-white-bg);
 	border-radius: 2px;
 	min-height: 47px;
+	margin-top: 10px;
+	min-width: 360px;
+
 	box-shadow: rgb(0 0 0 / 20%) 0px 1px 1px 0px;
 }

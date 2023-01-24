@@ -29,7 +29,7 @@ const CartPage = (props) => {
 	const cart = useSelector((state) => state.cart);
 	const auth = useSelector((state) => state.auth);
 	const [cartItems, setCartItems] = useState(cart.cartItems);
-	console.log(cart.cartItems);
+	console.log(cartItems);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -74,7 +74,7 @@ const CartPage = (props) => {
 
 	return (
 		<Layout>
-			{cart.cartItems.length == undefined ? (
+			{Object.keys(cartItems).length < 0 ? (
 				<EmptyCart />
 			) : (
 				<div className="cartContainer" style={{ alignItems: "flex-start" }}>
@@ -84,7 +84,7 @@ const CartPage = (props) => {
 						style={{
 							width: "calc(100% - 400px)",
 							overflow: "hidden",
-							background: "var(--color-white-bg)",
+							background: "#ffffff",
 							borderRadius: "2px",
 							minHeight: "47px",
 							boxShadow: "rgb(0 0 0 / 20%) 0px 1px 1px 0px",
@@ -107,12 +107,12 @@ const CartPage = (props) => {
 								display: "flex",
 								background: "#ffffff",
 								justifyContent: "flex-end",
-								boxShadow: "0 0 10px 10px #eee",
+								boxShadow: "0 0 10px 4px #eee",
 								padding: "10px 0",
 								boxSizing: "border-box",
 							}}
 						>
-							<div style={{ width: "250px" }}>
+							<div style={{ width: "250px", marginRight: "10px" }}>
 								<MaterialButton
 									title="PLACE ORDER"
 									onClick={() => navigate(`/checkout`)}

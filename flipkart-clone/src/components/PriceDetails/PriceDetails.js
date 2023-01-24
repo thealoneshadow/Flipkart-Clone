@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Card from "../../components/UI/Card/Card";
-import { Box, Typography, styled } from "@mui/material";
+import { Box, Divider, Typography, styled } from "@mui/material";
 import "./PriceDetails.css";
 const Header = styled(Box)`
 	padding: 15px 24px;
@@ -53,6 +53,7 @@ const PriceDetails = (props) => {
 			<Header>
 				<Heading>PRICE DETAILS</Heading>
 			</Header>
+			<Divider />
 			<Container>
 				<Typography>
 					Price ({props.totalItem} item)

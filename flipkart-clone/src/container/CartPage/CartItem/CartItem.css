@@ -33,6 +33,7 @@
 
 .cartActionBtn {
 	margin: 0 10px;
+	margin-left: 20px;
 	font-family: "Roboto";
 	font-weight: 600;
 	text-transform: uppercase;

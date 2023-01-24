@@ -155,11 +155,23 @@ exports.getProducts = async (req, res) => {
 };
 
 exports.getProductDetailsByCategory = async (req, res) => {
-	if (req.params) {
+	if (req) {
 		try {
-			const products = await Product.find({
-				category: req.params.productCategory,
-			}).exec();
+			const categories = await Category.find({}).exec();
+			const products = [];
+			for (let i = 0; i < 10; i++) {
+				let data = await Product.find({
+					category: categories[i]._id,
+				})
+					.select(
+						"_id name price maximumRetailPrice slug productPictures category"
+					)
+					.populate({ path: "category", select: "_id name" })
+					.exec();
+				for (let j = 0; j < data.length; j++) {
+					products.push(data[j]);
+				}
+			}
 			//for (let i = 0; i < products.length; i++) {
 			// const url = await generateAIImage.generateAIImage(
 			// 	products[i].name + products[i].description

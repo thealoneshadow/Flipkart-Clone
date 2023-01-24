@@ -4,8 +4,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../actions";
 import Layout from "../../components/Layout/Layout";
-import Card from "../../components/UI/Card/Card";
-import Price from "../../components/UI/Price";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CircleIcon from "@mui/icons-material/Circle";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./OrderDetailsPage.css";
 
@@ -17,6 +18,7 @@ import "./OrderDetailsPage.css";
 const OrderDetailsPage = (props) => {
 	const dispatch = useDispatch();
 	const orderDetails = useSelector((state) => state.user.orderDetails);
+	console.log(orderDetails);
 	const params = useParams();
 	useEffect(() => {
 		const payload = {
@@ -60,7 +62,7 @@ const OrderDetailsPage = (props) => {
 
 	return (
 		<Layout>
-			<div
+			{/* <div
 				style={{
 					width: "1160px",
 					margin: "10px auto",
@@ -125,7 +127,77 @@ const OrderDetailsPage = (props) => {
 						</div>
 					</Card>
 				))}
-			</div>
+			</div> */}
+			<Link
+				to={`/order_details/${orderDetails._id}`}
+				className="flex p-4 items-start bg-white border rounded gap-2 sm:gap-0 hover:shadow-lg"
+			>
+				<div className="w-full sm:w-32 h-20">
+					<img
+						draggable="false"
+						className="h-full w-full object-contain"
+						src={orderDetails.items[0].productId.productPictures[0].img}
+						alt={orderDetails.items[0].productId.name}
+					/>
+				</div>
+				<div className="flex flex-col sm:flex-row justify-between w-full">
+					<div className="flex flex-col gap-1 overflow-hidden">
+						<p className="text-sm">
+							{orderDetails.items[0].productId.name.length > 40
+								? `${orderDetails.items[0].productId.name.substring(0, 40)}...`
+								: orderDetails.items[0].productId.name}
+						</p>
+						<p className="text-xs text-gray-500 mt-2">
+							Quantity: {orderDetails.items[0].productId.purchasedQty}
+						</p>
+						<p className="text-xs text-gray-500">
+							Total: ₹{orderDetails.items[0].productId.payablePrice}
+						</p>
+					</div>
+
+					<div className="flex flex-col sm:flex-row mt-1 sm:mt-0 gap-2 sm:gap-20 sm:w-1/2">
+						<p className="text-sm">
+							₹{orderDetails.items[0].productId.payablePrice}
+						</p>
+
+						<div className="flex flex-col gap-1.5">
+							<p className="text-sm font-medium flex items-center gap-1">
+								{orderDetails.orderStatus[0].type === "Shipped" ? (
+									<>
+										<span className="text-primary-orange pb-0.5">
+											<CircleIcon sx={{ fontSize: "14px" }} />
+										</span>
+										Shipped
+									</>
+								) : orderDetails.orderStatus[0].type === "Delivered" ? (
+									<>
+										<span className="text-primary-green pb-0.5">
+											<CircleIcon sx={{ fontSize: "14px" }} />
+										</span>
+										Delivered on {formatDate(orderDetails.updatedAt)}
+									</>
+								) : (
+									<>
+										<span className="text-primary-green pb-0.5">
+											<RadioButtonUncheckedIcon sx={{ fontSize: "14px" }} />
+										</span>
+										Ordered on {formatDate(orderDetails.createdAt)}
+									</>
+								)}
+							</p>
+							{/* {orderStatus === "Delivered" ? (
+								<p className="text-xs ml-1">
+									Your item has been {orderDetails.items.orderStatus[0].type}
+								</p>
+							) : orderStatus === "Shipped" ? (
+								<p className="text-xs ml-1">Your item has been {orderStatus}</p>
+							) : (
+								<p className="text-xs ml-1">Seller has processed your order</p>
+							)} */}
+						</div>
+					</div>
+				</div>
+			</Link>
 		</Layout>
 	);
 };
