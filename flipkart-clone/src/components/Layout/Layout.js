@@ -14,6 +14,9 @@ export default function Layout(props) {
 			{location.pathname === "/" ? <NavBar /> : <MenuHeader />}
 
 			{props.children}
+			<footer style={{ position: "fixed", bottom: 0 }}>
+				<p>I am footer</p>
+			</footer>
 		</div>
 	);
 }

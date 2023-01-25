@@ -13,6 +13,7 @@ import React, { useState, useEffect } from "react";
 import { PriceReview } from "../../../components/UI/listProducts";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsByCategory } from "../../../actions";
+import { addEllipsis } from "../../../utils/addEllipsis";
 const responsive = {
 	desktop: {
 		breakpoint: { max: 3000, min: 1024 },
@@ -116,7 +117,7 @@ const MultiSlide = ({ data, timer, title }) => {
 					<PriceReview
 						url={`/${product.name}/${product._id}/page`}
 						image={product.productPictures[0].img}
-						title={product.name}
+						title={addEllipsis(product.name)}
 						price={product.price}
 						mrp={product.maximumRetailPrice}
 					/>

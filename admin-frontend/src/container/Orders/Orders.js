@@ -15,6 +15,7 @@ import "./Orders.css";
 
 const Orders = (props) => {
 	const order = useSelector((state) => state.order);
+	console.log(order);
 	const [type, setType] = useState("");
 	const dispatch = useDispatch();
 
@@ -52,14 +53,14 @@ const Orders = (props) => {
 							alignItems: "center",
 						}}
 					>
-						<div>
+						{/* <div>
 							<div className="title">Items</div>
 							{orderItem.items.map((item, index) => (
 								<div className="value" key={index}>
 									{item.productId}
 								</div>
 							))}
-						</div>
+						</div> */}
 						<div>
 							<span className="title">Total Price</span>
 							<br />

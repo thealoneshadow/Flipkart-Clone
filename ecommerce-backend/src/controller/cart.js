@@ -64,28 +64,38 @@ exports.addItemToCart = (req, res) => {
 exports.getCartItems = (req, res) => {
 	//const { user } = req.body.payload;
 	//if(user){
-	Cart.findOne({ user: req.user._id })
-		.populate(
-			"cartItems.product",
-			"_id name price maximumRetailPrice productPictures"
-		)
-		.exec((error, cart) => {
-			if (error) return res.status(400).json({ error });
-			if (cart) {
-				let cartItems = {};
-				cart.cartItems.forEach((item, index) => {
-					cartItems[item.product._id.toString()] = {
-						_id: item.product._id.toString(),
-						name: item.product.name,
-						img: item.product.productPictures[0].img,
-						price: item.product.price,
-						maximumRetailPrice: item.product.maximumRetailPrice,
-						qty: item.quantity,
-					};
-				});
-				res.status(200).json({ cartItems });
-			}
+	try {
+		Cart.findOne({ user: req.user._id })
+			.populate(
+				"cartItems.product",
+				"_id name price maximumRetailPrice productPictures"
+			)
+			.exec((error, cart) => {
+				console.log(cart);
+				if (error) return res.status(400).json({ error });
+				if (cart) {
+					let cartItems = {};
+					cart.cartItems.forEach((item, index) => {
+						cartItems[item.product._id.toString()] = {
+							_id: item.product._id.toString(),
+							name: item.product.name,
+							img: item.product.productPictures[0].img,
+							price: item.product.price,
+							maximumRetailPrice: item.product.maximumRetailPrice,
+							qty: item.quantity,
+						};
+					});
+					res.status(200).json({ cartItems });
+				} else {
+					res.status(200).json({ cartItems: {} });
+				}
+			});
+	} catch (error) {
+		return res.status(400).json({
+			status: 500,
+			message: error,
 		});
+	}
 	//}
 };
 

@@ -28,7 +28,12 @@ const OrderPage = (props) => {
 
 	return (
 		<Layout>
-			<div style={{ maxWidth: "1160px", margin: "5px auto" }}>
+			<div
+				style={{
+					width: "1160px",
+					margin: "10px auto",
+				}}
+			>
 				<Breed
 					breed={[
 						{ name: "Home", href: "/" },
@@ -39,7 +44,13 @@ const OrderPage = (props) => {
 				/>
 				{user.orders.map((order) => {
 					return order.items.map((item) => (
-						<Card style={{ display: "block", margin: "5px 0" }}>
+						<Card
+							style={{
+								display: "inline-flex",
+								margin: "5px 0 10px 0",
+							}}
+							className="orderDetails"
+						>
 							<Link
 								to={`/order_details/${order._id}`}
 								className="orderItemContainer"
@@ -47,9 +58,7 @@ const OrderPage = (props) => {
 								<div className="orderImgContainer">
 									<img
 										className="orderImg"
-										src={generatePublicUrl(
-											item.productId.productPictures[0].img
-										)}
+										src={item.productId.productPictures[0].img}
 									/>
 								</div>
 								<div className="orderRow">
@@ -58,7 +67,7 @@ const OrderPage = (props) => {
 										<BiRupee />
 										{item.payablePrice}
 									</div>
-									<div>{order.paymentStatus}</div>
+									<div style={{ float: "right" }}>{order.paymentStatus}</div>
 								</div>
 							</Link>
 						</Card>

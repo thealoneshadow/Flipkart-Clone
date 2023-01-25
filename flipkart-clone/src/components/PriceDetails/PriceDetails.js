@@ -47,7 +47,7 @@ const Discount = styled(Typography)`
 
 const PriceDetails = (props) => {
 	return (
-		<div className="priceDetailsMain">
+		<Card className="priceDetailsMain">
 			{" "}
 			{/* className={classes.component}> */}
 			<Header>
@@ -77,7 +77,7 @@ const PriceDetails = (props) => {
 					You will save ₹{props.mrp - props.totalPrice} on this order
 				</Discount>
 			</Container>
-		</div>
+		</Card>
 		// <Card
 		// 	headerLeft={"Price Details"}
 		// 	style={{ maxWidth: "380px", margin: "0 10px" }}

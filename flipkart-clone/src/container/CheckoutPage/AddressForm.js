@@ -175,26 +175,37 @@ const AddressForm = (props) => {
 						/>
 					</div>
 				</div>
-				<div>
-					<label>Address Type</label>
+				<div style={{ marginTop: "15px" }}>
+					<span
+						style={{ marginLeft: "0px", marginBottom: "5px" }}
+						className="stepTitle"
+					>
+						Address Type
+					</span>
 					<div className="flexRow">
-						<div>
+						<div style={{ margin: "4px" }}>
 							<input
 								type="radio"
 								onClick={() => setAddressType("home")}
 								name="addressType"
 								value="home"
+								style={{ verticalAlign: "middle" }}
 							/>
-							<span>Home</span>
+							<span style={{ marginLeft: "4px", fontSize: "15px" }}>
+								Home (All day delivery)
+							</span>
 						</div>
-						<div>
+						<div style={{ margin: "4px" }}>
 							<input
 								type="radio"
 								onClick={() => setAddressType("work")}
 								name="addressType"
+								style={{ verticalAlign: "middle" }}
 								value="work"
 							/>
-							<span>Work</span>
+							<span style={{ marginLeft: "4px", fontSize: "15px" }}>
+								Work (Delivery between 10AM - 5PM)
+							</span>
 						</div>
 					</div>
 				</div>

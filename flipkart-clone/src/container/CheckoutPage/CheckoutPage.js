@@ -15,6 +15,7 @@ import CartPage from "../CartPage/CartPage";
 import AddressForm from "./AddressForm";
 import { useNavigate } from "react-router-dom";
 import "./CheckoutPage.css";
+import SuperCoin from "../../components/SupeCoin/SuperCoin";
 
 /**
  * @author theAloneshadow(Divyanshu Goyal)
@@ -23,7 +24,7 @@ import "./CheckoutPage.css";
 
 const CheckoutStep = (props) => {
 	return (
-		<div className="checkoutStep">
+		<Card className="checkoutStep">
 			<div
 				onClick={props.onClick}
 				className={`checkoutHeader ${props.active && "active"}`}
@@ -34,7 +35,7 @@ const CheckoutStep = (props) => {
 				</div>
 			</div>
 			{props.body && props.body}
-		</div>
+		</Card>
 	);
 };
 
@@ -201,7 +202,14 @@ const CheckoutPage = (props) => {
 						active={!auth.authenticate}
 						body={
 							auth.authenticate ? (
-								<div className="loggedInId">
+								<div
+									className="loggedInId"
+									style={{
+										fontSize: "14px",
+										paddingBottom: "7px",
+										marginLeft: "54px",
+									}}
+								>
 									<span style={{ fontWeight: 500 }}>{auth.user.fullName}</span>
 									<span style={{ margin: "0 5px" }}>{auth.user.email}</span>
 								</div>
@@ -219,7 +227,21 @@ const CheckoutPage = (props) => {
 						body={
 							<>
 								{confirmAddress ? (
-									<div className="stepCompleted">{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.pinCode}`}</div>
+									<div
+										style={{
+											fontSize: "14px",
+											marginLeft: "-4px",
+										}}
+										className="stepCompleted"
+									>
+										<span style={{ fontWeight: 500 }}>
+											{selectedAddress.name}
+										</span>
+										{` ${selectedAddress.address} - `}
+										<span style={{ fontWeight: 500 }}>
+											{selectedAddress.pinCode}
+										</span>
+									</div>
 								) : (
 									address.map((adr) => (
 										<Address
@@ -243,6 +265,7 @@ const CheckoutPage = (props) => {
 							stepNumber={"+"}
 							title={"ADD NEW ADDRESS"}
 							active={false}
+							className="confirmation"
 							onClick={() => setNewAddress(true)}
 						/>
 					) : null}
@@ -251,6 +274,7 @@ const CheckoutPage = (props) => {
 						stepNumber={"3"}
 						title={"ORDER SUMMARY"}
 						active={orderSummary}
+						className="confirmation"
 						body={
 							orderSummary ? (
 								<CartPage onlyCartItems={true} />
@@ -264,29 +288,23 @@ const CheckoutPage = (props) => {
 
 					{orderSummary && (
 						<Card
+							className="flexRow sb checkoutStep confirmation"
 							style={{
-								margin: "10px 0",
+								padding: "20px",
+								alignItems: "center",
 							}}
 						>
-							<div
-								className="flexRow sb"
+							<p style={{ fontSize: "14px" }}>
+								Order confirmation email will be sent to{" "}
+								<strong>{auth.user.email}</strong>
+							</p>
+							<MaterialButton
+								title="CONTINUE"
+								onClick={userOrderConfirmation}
 								style={{
-									padding: "20px",
-									alignItems: "center",
+									width: "200px",
 								}}
-							>
-								<p style={{ fontSize: "12px" }}>
-									Order confirmation email will be sent to{" "}
-									<strong>{auth.user.email}</strong>
-								</p>
-								<MaterialButton
-									title="CONTINUE"
-									onClick={userOrderConfirmation}
-									style={{
-										width: "200px",
-									}}
-								/>
-							</div>
+							/>
 						</Card>
 					)}
 
@@ -296,7 +314,7 @@ const CheckoutPage = (props) => {
 						active={paymentOption}
 						body={
 							paymentOption && (
-								<div>
+								<div style={{ paddingBottom: "5px" }}>
 									<div
 										className="flexRow"
 										style={{
@@ -304,8 +322,15 @@ const CheckoutPage = (props) => {
 											padding: "20px",
 										}}
 									>
-										<input type="radio" name="paymentOption" value="cod" />
-										<div>Cash on delivery</div>
+										<input
+											type="radio"
+											name="paymentOption"
+											value="cod"
+											style={{ verticalAlign: "middle" }}
+										/>
+										<div style={{ marginLeft: "4px", fontSize: "15px" }}>
+											Cash on delivery
+										</div>
 									</div>
 									<MaterialButton
 										title="CONFIRM ORDER"
@@ -322,15 +347,26 @@ const CheckoutPage = (props) => {
 				</div>
 
 				{/* Price Component */}
-				<PriceDetails
-					totalItem={Object.keys(cart.cartItems).reduce(function (qty, key) {
-						return qty + cart.cartItems[key].qty;
-					}, 0)}
-					totalPrice={Object.keys(cart.cartItems).reduce((totalPrice, key) => {
-						const { price, qty } = cart.cartItems[key];
-						return totalPrice + price * qty;
-					}, 0)}
-				/>
+				<div>
+					<PriceDetails
+						totalItem={Object.keys(cart.cartItems).reduce(function (qty, key) {
+							return qty + cart.cartItems[key].qty;
+						}, 0)}
+						totalPrice={Object.keys(cart.cartItems).reduce(
+							(totalPrice, key) => {
+								const { price, qty } = cart.cartItems[key];
+								return totalPrice + price * qty;
+							},
+							0
+						)}
+						mrp={Object.keys(cart.cartItems).reduce((mrp, key) => {
+							const { maximumRetailPrice, qty } = cart.cartItems[key];
+							console.log(cart.cartItems);
+							return mrp + maximumRetailPrice * qty;
+						}, 0)}
+					/>
+					<SuperCoin />
+				</div>
 			</div>
 		</Layout>
 	);

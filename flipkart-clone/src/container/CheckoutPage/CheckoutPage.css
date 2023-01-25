@@ -6,8 +6,11 @@
 .checkoutStep {
 	box-sizing: border-box;
 	background: #fff;
-	box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.2);
-	margin-bottom: 10px;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+		0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+	border-radius: 2px;
+	border: none;
+	margin: 10px 20px 20px 20px;
 }
 .checkoutHeader {
 	width: 100%;
@@ -29,6 +32,12 @@
 }
 .checkoutHeader.active .stepNumber {
 	background: #fff;
+}
+
+.confirmation {
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+		0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+	border-radius: 3px;
 }
 .stepTitle {
 	display: inline-block;
