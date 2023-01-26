@@ -21,7 +21,7 @@ const pageSchema = new mongoose.Schema(
 				navigateTo: { type: String },
 			},
 		],
-		products: [
+		carousel: [
 			{
 				img: {
 					type: String,
@@ -29,6 +29,14 @@ const pageSchema = new mongoose.Schema(
 				navigateTo: { type: String },
 			},
 		],
+		// products: [
+		// 	{
+		// 		img: {
+		// 			type: String,
+		// 		},
+		// 		navigateTo: { type: String },
+		// 	},
+		// ],
 		category: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Category",

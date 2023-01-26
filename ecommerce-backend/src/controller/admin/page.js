@@ -8,12 +8,12 @@ exports.createPage = (req, res) => {
 			navigateTo: `/bannerClicked?categoryId=${req.body.category}&type=${req.body.type}`,
 		}));
 	}
-	if (products.length > 0) {
-		req.body.products = products.map((product, index) => ({
-			img: `${process.env.API}/public/${product.filename}`,
-			navigateTo: `/productClicked?categoryId=${req.body.category}&type=${req.body.type}`,
-		}));
-	}
+	// if (products.length > 0) {
+	// 	req.body.products = products.map((product, index) => ({
+	// 		img: `${process.env.API}/public/${product.filename}`,
+	// 		navigateTo: `/productClicked?categoryId=${req.body.category}&type=${req.body.type}`,
+	// 	}));
+	// }
 	req.body.createdBy = req.user._id;
 
 	const page = new Page(req.body);

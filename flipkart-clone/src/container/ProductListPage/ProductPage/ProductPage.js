@@ -12,6 +12,8 @@ import Card from "../../../components/UI/Card/Card";
 export default function ProductPage() {
 	const dispatch = useDispatch();
 	const product = useSelector((state) => state.product);
+	console.log(product);
+
 	const { page } = product;
 	const location = useLocation();
 	useEffect(() => {
@@ -23,7 +25,7 @@ export default function ProductPage() {
 	}, []);
 
 	return (
-		<div style={{ margin: "0 10px" }}>
+		<div style={{ margin: "0 10px", minHeight: "50vh" }}>
 			<h3>{page.title}</h3>
 			<Carousel renderThumbs={() => {}}>
 				{page.banners &&

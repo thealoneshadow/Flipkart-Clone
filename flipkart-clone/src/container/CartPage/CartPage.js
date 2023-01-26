@@ -29,7 +29,7 @@ const CartPage = (props) => {
 	const cart = useSelector((state) => state.cart);
 	const auth = useSelector((state) => state.auth);
 	const [cartItems, setCartItems] = useState(cart.cartItems);
-	console.log(cartItems);
+	console.log(Object.keys(cartItems));
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -74,7 +74,7 @@ const CartPage = (props) => {
 
 	return (
 		<Layout>
-			{Object.keys(cartItems).length < 0 ? (
+			{Object.keys(cartItems).length == [] ? (
 				<EmptyCart />
 			) : (
 				<div className="cartContainer" style={{ alignItems: "flex-start" }}>

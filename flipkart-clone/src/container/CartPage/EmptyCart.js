@@ -27,7 +27,7 @@ export default function EmptyCart() {
 
 	return (
 		<Component>
-			<Container>
+			<Container style={{ minHeight: "50vh" }}>
 				<Image src={imgurl} />
 				<Typography>Your cart is empty!</Typography>
 				<Typography component="span" style={{ fontSize: "12px" }}>

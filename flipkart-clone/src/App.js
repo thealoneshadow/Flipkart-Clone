@@ -20,6 +20,7 @@ import {
 	getProductsByCategory,
 	getProductsBySlug,
 } from "./actions/product.action";
+import NotFound from "./container/NotFound/NotFound";
 function App() {
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
@@ -49,6 +50,7 @@ function App() {
 						element={<ProductDetailsPage />}
 					/>
 					<Route path="/:slug" element={<ProductList />} />
+					<Route path="/*" element={<NotFound />} />
 				</Switch>
 			</Router>
 		</div>

@@ -3,6 +3,7 @@
 .cartContainer {
 	display: flex;
 	max-width: 1260px;
+	min-height: 50vh;
 	margin: 15px auto;
 }
 

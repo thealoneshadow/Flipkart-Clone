@@ -23,6 +23,16 @@ export default function HomePage() {
 	const getAllProducts = useSelector((state) => state.product);
 	const { products, error } = getAllProducts;
 	console.log(products);
+	let filterProducts = products.filter(
+		(product) => product.category._id === "63c695ffa05257ccbe391ced"
+	);
+	console.log(filterProducts);
+	let filterProducts2 = products.filter(
+		(product) => product.category._id === "636407adf082695720e8002c"
+	);
+	let filterProducts3 = products.filter(
+		(product) => product.category._id === "63640790f082695720e8002a"
+	);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getProductsByCategory(""));
@@ -35,25 +45,25 @@ export default function HomePage() {
 				<MidSlide products={products} />
 				<MidSection />
 				<Slide
-					data={products}
+					data={filterProducts}
 					title="Discounts for You"
 					timer={false}
 					multi={true}
 				/>
 				<Slide
-					data={products}
+					data={filterProducts2}
 					title="Suggested Items"
 					timer={false}
 					multi={true}
 				/>
 				<Slide
-					data={products}
+					data={filterProducts3}
 					title="Top Selection"
 					timer={false}
 					multi={true}
 				/>
 				<Slide
-					data={products}
+					data={filterProducts3}
 					title="Recommended Items"
 					timer={false}
 					multi={true}
