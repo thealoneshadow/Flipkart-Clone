@@ -31,16 +31,14 @@ exports.generateAIImage = async (prompt) => {
 };
 
 exports.chatgpt = async (prompt) => {
-	console.log(prompt);
 	const completion = await openai.createCompletion({
 		model: "text-davinci-003",
 		prompt: prompt,
-		temperature: 0,
+		temperature: 0.9,
 		max_tokens: 1000,
 		top_p: 1,
 		frequency_penalty: 0.5,
 		presence_penalty: 0,
 	});
-	console.log(completion.data.choices[0].text);
 	return completion.data.choices[0].text;
 };
